@@ -636,7 +636,7 @@ A versioned release will be archived using a persistent research identifier once
 
 **GitHub:** `<repository-url>`
 
-**DOI:** `<to be assigned>`
+**DOI:** https://doi.org/10.5281/zenodo.22260336
 
 ---
 
@@ -649,11 +649,9 @@ A formal citation will be added with the corresponding research publication and 
   author  = {Paramesh Sriram},
   title   = {PHASE: Physics-based Hierarchical Adaptive Spatial Evasion},
   year    = {2026},
-  version = {1.0.0},
-  url     = {<repository-url>},
-  doi     = {<doi>}
+  version = {1.0.1},
+  doi     = {10.5281/zenodo.22260336}
 }
-```
 
 ---
 
