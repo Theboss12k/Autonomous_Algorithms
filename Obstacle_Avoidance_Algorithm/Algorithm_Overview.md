@@ -1,6 +1,8 @@
-# Hierarchical Event-Triggered Multi-Agent Trajectory Coordination
+# PHASE — Physics-based Hierarchical Adaptive Spatial Evasion
 
-A research implementation of a hierarchical multi-agent trajectory coordination algorithm combining **localized A* replanning, event-triggered conflict resolution, priority-weighted lateral evasion, and iterative geometric constraint correction**.
+### Hierarchical Event-Triggered Multi-Agent Trajectory Coordination
+
+A research implementation of **PHASE (Physics-based Hierarchical Adaptive Spatial Evasion)** — a hierarchical multi-agent trajectory coordination algorithm combining **localized A* replanning, event-triggered conflict resolution, priority-weighted lateral evasion, and iterative geometric constraint correction**.
 
 The algorithm is designed for autonomous vehicles operating in a shared 2D/3D environment where multiple agents may encounter dynamic conflicts while following independent missions.
 
@@ -14,7 +16,7 @@ A straightforward approach is to repeatedly invoke a global planner whenever the
 
 This work investigates a hierarchical alternative.
 
-The proposed algorithm separates trajectory coordination into progressively more localized stages:
+The proposed **PHASE** algorithm separates trajectory coordination into progressively more localized stages:
 
 ```text
                     Vehicle Intent
@@ -47,7 +49,7 @@ Instead, computational effort is escalated only when the current coordination la
 
 ---
 
-# Algorithm Overview
+# PHASE Algorithm Overview
 
 The proposed framework consists of four primary mechanisms.
 
@@ -643,9 +645,9 @@ A versioned release will be archived using a persistent research identifier once
 A formal citation will be added with the corresponding research publication and archived software release.
 
 ```bibtex
-@software{paramesh_sriram_trajectory_coordination,
+@software{paramesh_sriram_phase,
   author  = {Paramesh Sriram},
-  title   = {Hierarchical Event-Triggered Multi-Agent Trajectory Coordination},
+  title   = {PHASE: Physics-based Hierarchical Adaptive Spatial Evasion},
   year    = {2026},
   version = {1.0.0},
   url     = {<repository-url>},
