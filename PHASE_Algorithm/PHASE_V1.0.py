@@ -95,7 +95,6 @@ class FramedAStarEngine:
             return True
 
         iterations = 0
-
         dz_options = [-1, 0, 1] if self.allow_3d else [0]
 
         while open_set and iterations < 6000:
@@ -184,14 +183,12 @@ def calculate_90_deg_deflection(v_target, v_opposite, obstacles):
 # 4. Hybrid Simulation Engine
 # ==========================================
 class Simulation:
-    def __init__(self, astar_frame_size=25.0, allow_3d=False, localized_pbd=True):
+    def __init__(self, astar_frame_size=25.0, allow_3d=False):
         self.vehicles = []
         self.obstacles = []
         self.dt = 0.2
         self.astar_frame_size = astar_frame_size
         self.allow_3d = allow_3d
-        self.localized_pbd = localized_pbd
-
         self.astar = FramedAStarEngine(grid_res=3.0, allow_3d=self.allow_3d)
         self.deflection_events = []
 
@@ -322,20 +319,28 @@ class Simulation:
                             self.deflection_events.append({'v_id': vj.v_id, 'pos': np.copy(vj.current_pos)})
 
             # ---------------------------------------------------------
-            # PHASE 3: TOGGLEABLE MICRO-PBD (Broad-Phase vs Global)
+            # PHASE 3: GLOBAL MICRO-PBD (Concrete-Bounce Fixed)
             # ---------------------------------------------------------
-            if self.localized_pbd:
-                danger_pairs = []
+            # BUMPED to 50 iterations for extreme rigid convergence
+            for _ in range(50):
+                
+                # 1. RESOLVE OBSTACLES FIRST (Guarantees walls are impenetrable)
+                for v in active_veh:
+                    for obs in self.obstacles:
+                        if obs.z_min <= v.prop_pos[2] <= obs.z_max:
+                            vec2d = v.prop_pos[:2] - np.array([obs.x, obs.y])
+                            dist2d = np.linalg.norm(vec2d)
+                            req_dist = obs.radius + v.margin + safety_buffer
+                            if dist2d < req_dist:
+                                overlap = req_dist - dist2d
+                                dir2d = vec2d / dist2d if dist2d > 1e-5 else np.array([1.0, 0.0])
+                                v.prop_pos[:2] += dir2d * overlap
+
+                # 2. RESOLVE VEHICLES SECOND (Guarantees final positions satisfy vehicle margins)
                 for i in range(n_veh):
                     vi = active_veh[i]
                     for j in range(i+1, n_veh):
                         vj = active_veh[j]
-                        dist = np.linalg.norm(vi.prop_pos - vj.prop_pos)
-                        if dist <= self.astar_frame_size:
-                            danger_pairs.append((vi, vj))
-
-                for _ in range(30):
-                    for vi, vj in danger_pairs:
                         req_dist = vi.margin + vj.margin + safety_buffer
                         dist = np.linalg.norm(vi.prop_pos - vj.prop_pos)
                         if dist < req_dist:
@@ -343,45 +348,11 @@ class Simulation:
                             dir = (vi.prop_pos - vj.prop_pos) / dist if dist > 1e-5 else np.array([1.0, 0.0, 0.0])
 
                             sum_mom = vi.momentum + vj.momentum
-                            vi.prop_pos += dir * (overlap * (vj.momentum / sum_mom) * 0.5)
-                            vj.prop_pos -= dir * (overlap * (vi.momentum / sum_mom) * 0.5)
+                            
+                            # BUMPED Stiffness to 0.8 to prevent sponginess in extreme chokepoints
+                            vi.prop_pos += dir * (overlap * (vj.momentum / sum_mom) * 0.8)
+                            vj.prop_pos -= dir * (overlap * (vi.momentum / sum_mom) * 0.8)
 
-                    for v in active_veh:
-                        for obs in self.obstacles:
-                            if obs.z_min <= v.prop_pos[2] <= obs.z_max:
-                                vec2d = v.prop_pos[:2] - np.array([obs.x, obs.y])
-                                dist2d = np.linalg.norm(vec2d)
-                                req_dist = obs.radius + v.margin + safety_buffer
-                                if dist2d < req_dist:
-                                    overlap = req_dist - dist2d
-                                    dir2d = vec2d / dist2d if dist2d > 1e-5 else np.array([1.0, 0.0])
-                                    v.prop_pos[:2] += dir2d * overlap
-            else:
-                for _ in range(30):
-                    for i in range(n_veh):
-                        vi = active_veh[i]
-                        for j in range(i+1, n_veh):
-                            vj = active_veh[j]
-                            req_dist = vi.margin + vj.margin + safety_buffer
-                            dist = np.linalg.norm(vi.prop_pos - vj.prop_pos)
-                            if dist < req_dist:
-                                overlap = req_dist - dist
-                                dir = (vi.prop_pos - vj.prop_pos) / dist if dist > 1e-5 else np.array([1.0, 0.0, 0.0])
-
-                                sum_mom = vi.momentum + vj.momentum
-                                vi.prop_pos += dir * (overlap * (vj.momentum / sum_mom) * 0.5)
-                                vj.prop_pos -= dir * (overlap * (vi.momentum / sum_mom) * 0.5)
-
-                    for v in active_veh:
-                        for obs in self.obstacles:
-                            if obs.z_min <= v.prop_pos[2] <= obs.z_max:
-                                vec2d = v.prop_pos[:2] - np.array([obs.x, obs.y])
-                                dist2d = np.linalg.norm(vec2d)
-                                req_dist = obs.radius + v.margin + safety_buffer
-                                if dist2d < req_dist:
-                                    overlap = req_dist - dist2d
-                                    dir2d = vec2d / dist2d if dist2d > 1e-5 else np.array([1.0, 0.0])
-                                    v.prop_pos[:2] += dir2d * overlap
 
             # ---------------------------------------------------------
             # PHASE 4: Commit State
@@ -405,7 +376,7 @@ class Simulation:
     def verify_manifest(self):
         print("\n" + "="*80)
         print(f"SIMULATION MANIFEST VERIFICATION (TIME/DELAY ANALYSIS)")
-        print(f"PBD Mode: {'LOCALIZED (A* Frame)' if self.localized_pbd else 'GLOBAL (Entire Map)'}")
+        print(f"PBD Mode: GLOBAL (Entire Map)")
         print("="*80)
 
         all_reached = True
@@ -418,7 +389,6 @@ class Simulation:
             else:
                 actual_duration = v.new_time - v.start_time
                 delay = actual_duration - v.orig_time
-                # Handle edge cases where due to arrival thresholds, delay is technically negative
                 if delay < 0: delay = 0.0
                 print(f"✅ Veh {v.v_id:<10} reached. [Ideal: {v.orig_time:>5.2f}s | Actual: {actual_duration:>5.2f}s | Delay: +{delay:>5.2f}s]")
 
@@ -565,10 +535,8 @@ class Simulation:
         sliders = [{'pad': {'b': 10, 't': 50}, 'len': 0.9, 'x': 0.1, 'y': 0, 'currentvalue': {'prefix': 'Time: ', 'suffix': 's'},
                     'steps': [{'args': [[f.name], {'frame': {'duration': 0, 'redraw': True}, 'mode': 'immediate'}], 'label': f.name, 'method': 'animate'} for f in fig.frames[::2]]}]
 
-        pbd_title_text = "LOCALIZED (A* Grid)" if self.localized_pbd else "GLOBAL (Entire Map)"
-
         fig.update_layout(
-            title=f"A* Routing & PBD [{pbd_title_text}] - Double-Click Legend to Isolate",
+            title=f"A* Routing & PBD [GLOBAL (Entire Map)] - Double-Click Legend to Isolate",
             plot_bgcolor='white', paper_bgcolor='white',
             scene=dict(xaxis=dict(showbackground=False, showgrid=True), yaxis=dict(showbackground=False, showgrid=True), zaxis=dict(showbackground=False, showgrid=True), aspectmode='data'),
             updatemenus=[{'type': 'buttons', 'showactive': False, 'y': 0, 'x': 0.05, 'xanchor': 'right', 'yanchor': 'top', 'pad': {'t': 50, 'r': 10},
@@ -582,8 +550,7 @@ if __name__ == "__main__":
 
     sim = Simulation(
         astar_frame_size=8.0,
-        allow_3d=False,
-        localized_pbd=False
+        allow_3d=False
     )
 
     sim.add_obstacle(CylinderObstacle(x=50, y=50, radius=25, z_min=0, z_max=20))
@@ -623,7 +590,7 @@ if __name__ == "__main__":
 
     # CORRECTED IMPOSSIBLE GOALS / START POSITIONS
     sim.add_vehicle(Vehicle("FAST_X", start=[0, 0, 10], end=[100, 0, 10], speed=250, mass_priority=1, margin=5, start_time=0))
-    sim.add_vehicle(Vehicle("FAST_Y", start=[50, -50, 10], end=[50, 85, 10], speed=250, mass_priority=1, margin=5, start_time=0)) # Moved out of central obs
+    sim.add_vehicle(Vehicle("FAST_Y", start=[50, -50, 10], end=[50, 85, 10], speed=250, mass_priority=1, margin=5, start_time=0)) 
 
     sim.add_vehicle(Vehicle("SWAP_A", start=[-20, 0, 10], end=[20, 0, 10], speed=200, mass_priority=1, margin=5, start_time=0))
     sim.add_vehicle(Vehicle("SWAP_B", start=[20, 0, 10], end=[-20, 0, 10], speed=200, mass_priority=1, margin=5, start_time=0))
@@ -639,8 +606,8 @@ if __name__ == "__main__":
     sim.add_vehicle(Vehicle("ZERO_A", start=[350, 50, 10], end=[450, 50, 10], speed=15, mass_priority=1, margin=8, start_time=0))
     sim.add_vehicle(Vehicle("ZERO_B", start=[350, 50, 10], end=[350, 150, 10], speed=15, mass_priority=1, margin=8, start_time=0))
 
-    sim.add_vehicle(Vehicle("INSIDE_OBS", start=[10, 50, 10], end=[150, 50, 10], speed=15, mass_priority=1, margin=5, start_time=0)) # Moved out of central obs
-    sim.add_vehicle(Vehicle("BAD_GOAL", start=[0, 50, 10], end=[10, 50, 10], speed=15, mass_priority=1, margin=5, start_time=0)) # Moved out of central obs
+    sim.add_vehicle(Vehicle("INSIDE_OBS", start=[10, 50, 10], end=[150, 50, 10], speed=15, mass_priority=1, margin=5, start_time=0))
+    sim.add_vehicle(Vehicle("BAD_GOAL", start=[0, 50, 10], end=[10, 50, 10], speed=15, mass_priority=1, margin=5, start_time=0)) 
 
     sim.add_vehicle(Vehicle("GRAZER_A", start=[0, 82, 10], end=[100, 82, 10], speed=20, mass_priority=1, margin=5, start_time=0))
     sim.add_vehicle(Vehicle("GRAZER_B", start=[0, 83, 10], end=[100, 83, 10], speed=20, mass_priority=1, margin=5, start_time=0))
