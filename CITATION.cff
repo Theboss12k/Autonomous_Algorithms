@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use PHASE in your work, please cite it as below."
+type: software
+title: "PHASE: Physics-based Hierarchical Adaptive Spatial Evasion"
+abstract: >-
+  PHASE is a hierarchical multi-agent trajectory coordination algorithm for
+  autonomous vehicles sharing a 2D or 3D environment. It combines localized A*
+  replanning, event-triggered conflict resolution, priority-weighted lateral
+  evasion and iterative geometric constraint correction, so that conflicts are
+  resolved locally instead of re-solving the global plan for every change.
+authors:
+  - given-names: Paramesh
+    family-names: Sriram
+version: 1.0.1
+date-released: 2026-09-02
+doi: 10.5281/zenodo.22260336
+repository-code: "https://github.com/Theboss12k/Autonomous_Algorithms"
+keywords:
+  - multi-agent systems
+  - trajectory planning
+  - conflict resolution
+  - A* search
+  - autonomous vehicles
+  - collision avoidance
