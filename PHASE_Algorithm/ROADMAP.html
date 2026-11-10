@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHASE Roadmap</title>
+<script>document.documentElement.classList.add('js')</script>
+<meta name="description" content="The journey of the PHASE multi-agent collision-avoidance algorithm: V1.0, V1.1, V1.2, the PX4 SIH test and PHASE-D, with results and technical details.">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f6f5f1;
+  --surface-1: #fcfcfb;
+  --surface-2: #efeee9;
+  --line: #dcdad2;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #77756f;
+  --accent: #1c5cab;
+  --accent-soft: #cde2fb;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --good: #1f7a3a;
+  --good-soft: #dcf0e2;
+  --warn: #9a5b00;
+  --warn-soft: #fbecd0;
+  --bad: #b3261e;
+  --bad-soft: #f8dcda;
+  --shadow: 0 1px 2px rgb(0 0 0 / .05), 0 8px 24px rgb(0 0 0 / .06);
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #121211;
+    --surface-1: #1a1a19;
+    --surface-2: #232321;
+    --line: #34332f;
+    --text-primary: #f0efec;
+    --text-secondary: #c3c2b7;
+    --text-muted: #8f8e86;
+    --accent: #86b6ef;
+    --accent-soft: #1d3150;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --good: #6fcf8c;
+    --good-soft: #17301f;
+    --warn: #f0b35a;
+    --warn-soft: #3a2a10;
+    --bad: #f08a82;
+    --bad-soft: #3d1a17;
+    --shadow: 0 1px 2px rgb(0 0 0 / .4), 0 8px 24px rgb(0 0 0 / .35);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #121211;
+  --surface-1: #1a1a19;
+  --surface-2: #232321;
+  --line: #34332f;
+  --text-primary: #f0efec;
+  --text-secondary: #c3c2b7;
+  --text-muted: #8f8e86;
+  --accent: #86b6ef;
+  --accent-soft: #1d3150;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --series-3: #199e70;
+  --good: #6fcf8c;
+  --good-soft: #17301f;
+  --warn: #f0b35a;
+  --warn-soft: #3a2a10;
+  --bad: #f08a82;
+  --bad-soft: #3d1a17;
+  --shadow: 0 1px 2px rgb(0 0 0 / .4), 0 8px 24px rgb(0 0 0 / .35);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+  font: 16px/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+code, .mono { font-family: var(--mono); font-size: .88em; }
+code { background: var(--surface-2); padding: .08em .35em; border-radius: 4px; }
+a { color: var(--accent); }
+h1, h2, h3, h4 { line-height: 1.2; margin: 0; letter-spacing: -.01em; }
+p { margin: 0 0 .8em; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- top bar ---------- */
+.bar {
+  position: sticky; top: 0; z-index: 50;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.bar .wrap { display: flex; align-items: center; gap: 16px; height: 56px; }
+.brand { font-weight: 700; white-space: nowrap; }
+.brand span { color: var(--text-muted); font-weight: 500; }
+.stations {
+  display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; flex: 1; min-width: 0;
+}
+.stations::-webkit-scrollbar { display: none; }
+.stations a {
+  text-decoration: none; color: var(--text-secondary); font-size: 13px; white-space: nowrap;
+  padding: 5px 10px; border-radius: 999px; transition: background .2s, color .2s;
+}
+.stations a:hover { background: var(--surface-2); }
+.stations a.active { background: var(--accent-soft); color: var(--text-primary); }
+.controls { display: flex; gap: 8px; align-items: center; }
+.switch {
+  display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-secondary);
+  background: none; border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px 5px 6px;
+  cursor: pointer; font-family: inherit; white-space: nowrap;
+}
+.switch .knob {
+  width: 28px; height: 16px; border-radius: 999px; background: var(--surface-2);
+  border: 1px solid var(--line); position: relative; transition: background .2s;
+}
+.switch .knob::after {
+  content: ""; position: absolute; top: 1px; left: 1px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--text-muted); transition: transform .2s, background .2s;
+}
+.switch[aria-pressed="true"] .knob { background: var(--accent-soft); }
+.switch[aria-pressed="true"] .knob::after { transform: translateX(12px); background: var(--accent); }
+.icon-btn {
+  width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); background: none;
+  color: var(--text-secondary); cursor: pointer; font-size: 15px; line-height: 1;
+}
+
+/* ---------- hero ---------- */
+.hero { padding: 72px 0 40px; }
+.hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
+.eyebrow {
+  font: 600 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent);
+  margin-bottom: 16px;
+}
+.hero h1 { font-size: clamp(34px, 5.4vw, 58px); font-weight: 750; letter-spacing: -.025em; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.lede { font-size: 19px; color: var(--text-secondary); margin-top: 20px; max-width: 34em; }
+.toy {
+  position: relative; aspect-ratio: 1; width: 100%; max-width: 440px; justify-self: center;
+  background: var(--surface-1); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.toy canvas { width: 100%; height: 100%; display: block; }
+.toy figcaption {
+  position: absolute; left: 12px; right: 12px; bottom: 10px; font-size: 12px; color: var(--text-muted);
+  line-height: 1.4;
+}
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 48px; }
+.kpi { background: var(--surface-1); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+.kpi b { display: block; font-size: 30px; font-weight: 750; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.kpi span { font-size: 13px; color: var(--text-secondary); line-height: 1.35; display: block; margin-top: 2px; }
+
+/* ---------- timeline ---------- */
+.journey { position: relative; padding: 40px 0 24px; }
+.section-head { margin: 0 0 32px; }
+.section-head h2 { font-size: clamp(26px, 3.4vw, 36px); font-weight: 720; }
+.section-head p { color: var(--text-secondary); margin-top: 10px; max-width: 46em; }
+.timeline { position: relative; padding-left: 56px; }
+.spine, .spine-fill {
+  position: absolute; left: 19px; top: 8px; width: 3px; border-radius: 3px;
+}
+.spine { bottom: 8px; background: var(--line); }
+.spine-fill { height: 0; background: linear-gradient(var(--series-1), var(--series-2)); transition: height .12s linear; }
+.station { position: relative; margin-bottom: 56px; }
+.station:last-child { margin-bottom: 0; }
+.dot {
+  position: absolute; left: -46px; top: 22px; width: 23px; height: 23px; border-radius: 50%;
+  background: var(--surface-1); border: 3px solid var(--line);
+  transition: border-color .4s, background .4s, transform .4s;
+}
+.station.passed .dot { border-color: var(--accent); background: var(--accent-soft); }
+.station.current .dot { transform: scale(1.25); }
+.station.planned .dot { border-style: dashed; }
+.card {
+  background: var(--surface-1); border: 1px solid var(--line); border-radius: 18px;
+  padding: 26px 28px; box-shadow: var(--shadow);
+}
+.station.planned .card { background: transparent; border-style: dashed; box-shadow: none; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 12px; }
+.tag {
+  font: 600 12px/1 var(--mono); padding: 6px 9px; border-radius: 6px;
+  background: var(--surface-2); color: var(--text-secondary);
+}
+.tag.ver { background: var(--accent-soft); color: var(--text-primary); }
+.tag.good { background: var(--good-soft); color: var(--good); }
+.tag.warn { background: var(--warn-soft); color: var(--warn); }
+.tag.bad { background: var(--bad-soft); color: var(--bad); }
+.card h3 { font-size: clamp(21px, 2.4vw, 26px); font-weight: 700; margin-bottom: 12px; }
+.card > p { color: var(--text-secondary); max-width: 52em; }
+
+/* pipeline chips */
+.pipe { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 18px 0 6px; }
+.pipe .step {
+  font-size: 13px; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--surface-2); color: var(--text-primary); line-height: 1.3;
+}
+.pipe .step small { display: block; color: var(--text-muted); font-size: 11px; }
+.pipe .step.new { border-color: var(--series-1); box-shadow: inset 0 0 0 1px var(--series-1); }
+.pipe .step.risk { border-color: var(--bad); box-shadow: inset 0 0 0 1px var(--bad); }
+.pipe .arrow { color: var(--text-muted); font-size: 13px; }
+.pipe-legend { font-size: 12px; color: var(--text-muted); display: flex; gap: 14px; flex-wrap: wrap; }
+.pipe-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+
+/* metric tiles */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 18px; }
+.tile { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+.tile b { font-size: 22px; font-weight: 720; font-variant-numeric: tabular-nums; display: block; }
+.tile span { font-size: 12.5px; color: var(--text-secondary); line-height: 1.35; display: block; }
+.tile.good b { color: var(--good); }
+.tile.bad b { color: var(--bad); }
+.tile.warn b { color: var(--warn); }
+
+/* tech drawer */
+.tech-btn {
+  margin-top: 20px; display: inline-flex; align-items: center; gap: 8px;
+  font: 600 13px/1 var(--sans); color: var(--accent); background: none; border: 1px solid var(--line);
+  padding: 9px 13px; border-radius: 999px; cursor: pointer;
+}
+.tech-btn:hover { background: var(--surface-2); }
+.tech-btn .chev { transition: transform .3s; display: inline-block; }
+.tech-btn[aria-expanded="true"] .chev { transform: rotate(180deg); }
+.tech { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .45s cubic-bezier(.2,.7,.2,1); }
+.tech.open { grid-template-rows: 1fr; }
+.tech > div { overflow: hidden; }
+.tech-body {
+  margin-top: 16px; padding: 20px 22px; border-radius: 12px; background: var(--surface-2);
+  font-size: 14.5px; color: var(--text-secondary);
+}
+.tech-body h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-primary); margin: 18px 0 8px; }
+.tech-body h4:first-child { margin-top: 0; }
+.tech-body ul { margin: 0 0 6px; padding-left: 20px; }
+.tech-body li { margin-bottom: 4px; }
+.tech-body pre {
+  font: 13px/1.55 var(--mono); background: var(--surface-1); border: 1px solid var(--line);
+  border-radius: 8px; padding: 12px 14px; overflow-x: auto; color: var(--text-primary); margin: 8px 0;
+}
+.tech-body table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 6px 0; }
+.tech-body th, .tech-body td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tech-body th { color: var(--text-primary); font-weight: 600; }
+.tbl-scroll { overflow-x: auto; }
+
+/* glossary terms */
+.term { border-bottom: 1px dotted var(--text-muted); cursor: help; }
+#tip {
+  position: fixed; z-index: 100; pointer-events: none; max-width: 300px;
+  background: var(--text-primary); color: var(--bg); font-size: 13px; line-height: 1.45;
+  padding: 9px 11px; border-radius: 8px; opacity: 0; transform: translateY(4px);
+  transition: opacity .15s, transform .15s;
+}
+#tip.show { opacity: 1; transform: none; }
+#tip b { display: block; margin-bottom: 2px; }
+
+/* ---------- charts ---------- */
+.compare { padding: 64px 0 24px; }
+.chart-card { background: var(--surface-1); border: 1px solid var(--line); border-radius: 18px; padding: 24px 26px; box-shadow: var(--shadow); margin-bottom: 24px; }
+.chart-card h3 { font-size: 19px; font-weight: 700; }
+.chart-card .sub { color: var(--text-secondary); font-size: 14px; margin: 6px 0 18px; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--text-secondary); margin-bottom: 14px; }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -2px; }
+.multiples { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.multiples h4 { font-size: 13.5px; font-weight: 600; margin-bottom: 10px; }
+.hrow { display: grid; grid-template-columns: 44px 1fr 46px; gap: 8px; align-items: center; height: 30px; }
+.hrow .lab { font: 12.5px var(--mono); color: var(--text-secondary); }
+.hrow .val { font-size: 13px; font-variant-numeric: tabular-nums; color: var(--text-primary); }
+.track { position: relative; height: 18px; }
+.barfill {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 0; border-radius: 0 4px 4px 0;
+  background: var(--series-1); transition: width 1s cubic-bezier(.2,.7,.2,1);
+}
+.barfill.s2 { background: var(--series-2); }
+.barfill.zero { width: 2px !important; background: var(--text-muted); }
+.hit { position: absolute; inset: -6px 0; }
+.sep-group { margin-bottom: 18px; }
+.sep-group h4 { font-size: 13.5px; font-weight: 600; margin-bottom: 6px; }
+.sep-row { display: grid; grid-template-columns: 110px 1fr 60px; gap: 10px; align-items: center; height: 24px; }
+.sep-row .lab { font-size: 12.5px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sep-row .val { font-size: 13px; font-variant-numeric: tabular-nums; }
+.sep-row .track { height: 14px; }
+.sep-plot { position: relative; }
+.refline {
+  position: absolute; top: 0; bottom: 0; width: 0; border-left: 2px dashed var(--text-muted); pointer-events: none;
+}
+.refline span {
+  position: absolute; top: -20px; left: -40px; width: 80px; text-align: center; font-size: 11.5px; color: var(--text-secondary);
+}
+.axis { display: grid; grid-template-columns: 110px 1fr 60px; gap: 10px; font-size: 11.5px; color: var(--text-muted); margin-top: 4px; }
+.axis .ticks { position: relative; height: 16px; }
+.axis .ticks span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+#bench { width: 100%; height: auto; display: block; }
+#bench text { fill: var(--text-muted); font-size: 11px; font-family: var(--sans); }
+#bench .grid line { stroke: var(--line); }
+#bench .s1 { stroke: var(--series-1); }
+#bench .s2 { stroke: var(--series-2); }
+.as-table { margin-top: 14px; font-size: 13.5px; }
+.as-table summary { cursor: pointer; color: var(--accent); }
+.as-table table { border-collapse: collapse; margin-top: 8px; width: 100%; }
+.as-table th, .as-table td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+
+/* ---------- honesty + footer ---------- */
+.notes { padding: 40px 0 24px; }
+.notes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.note { border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; background: var(--surface-1); }
+.note h4 { font-size: 15px; margin-bottom: 8px; }
+.note p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+footer { padding: 40px 0 64px; color: var(--text-muted); font-size: 13.5px; }
+footer ul { padding-left: 18px; }
+
+/* ---------- reveal on scroll ---------- */
+.js .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+.js .reveal.in { opacity: 1; transform: none; }
+.reveal.d1 { transition-delay: .08s; } .reveal.d2 { transition-delay: .16s; } .reveal.d3 { transition-delay: .24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .barfill, .tech, .spine-fill { transition: none; }
+}
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .kpis { grid-template-columns: repeat(2, 1fr); }
+  .multiples { grid-template-columns: 1fr; }
+  .notes-grid { grid-template-columns: 1fr; }
+  .switch .txt { display: none; }
+}
+@media (max-width: 560px) {
+  .wrap { padding: 0 16px; }
+  .bar .wrap { gap: 10px; }
+  .brand span { display: none; }
+  .hero { padding-top: 40px; }
+  .timeline { padding-left: 34px; }
+  .spine, .spine-fill { left: 9px; }
+  .dot { left: -34px; width: 19px; height: 19px; }
+  .card, .chart-card { padding: 20px 18px; }
+  .tech-body { padding: 16px; }
+  .sep-row, .axis { grid-template-columns: 108px 1fr 48px; gap: 8px; }
+  .sep-row .lab { font-size: 11.5px; }
+  .stations { -webkit-mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent); mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent); }
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <div class="brand">PHASE <span>roadmap</span></div>
+    <nav class="stations" aria-label="Milestones">
+      <a href="#concept">Concept</a>
+      <a href="#v10">V1.0</a>
+      <a href="#v11">V1.1</a>
+      <a href="#v12">V1.2</a>
+      <a href="#px4">PX4 test</a>
+      <a href="#phased">PHASE-D</a>
+      <a href="#next">Next</a>
+      <a href="#compare">Compare</a>
+    </nav>
+    <div class="controls">
+      <button class="switch" id="techAll" aria-pressed="false" title="Open every technical panel">
+        <span class="knob"></span><span class="txt">Tech details</span>
+      </button>
+      <button class="icon-btn" id="theme" aria-label="Toggle light or dark theme">◐</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="reveal">
+        <div class="eyebrow">Physics-based Hierarchical Adaptive Spatial Evasion</div>
+        <h1>From a billiard-ball idea to <em>three flying quadcopters</em></h1>
+        <p class="lede">PHASE treats every vehicle as a physical object: the heavier one keeps its line, the lighter one gets out of the way.
+          This page follows the algorithm from its first upload, through three kinematic versions, to closed-loop flights on PX4 and the dynamics-aware PHASE-D.</p>
+        <p class="lede" style="font-size:15px;margin-top:8px">Scroll for the story. Use <b>Tech details</b> (top right) or the button on any milestone for the internals.</p>
+      </div>
+      <figure class="toy reveal d2" aria-label="Animated illustration of three vehicles swapping places">
+        <canvas id="toy"></canvas>
+        <figcaption>Toy illustration running in your browser: three vehicles swap places with growing safety balls (rings) and priority braking. Not the PHASE code.</figcaption>
+      </figure>
+    </div>
+    <div class="kpis">
+      <div class="kpi reveal"><b data-count="4">4</b><span>algorithm versions: V1.0, V1.1, V1.2, PHASE-D</span></div>
+      <div class="kpi reveal d1"><b data-count="22">22</b><span>deterministic test cases shared by all three kinematic versions</span></div>
+      <div class="kpi reveal d2"><b data-count="3">3</b><span>PX4 SIH quadcopters flown closed-loop</span></div>
+      <div class="kpi reveal d3"><b data-count="0">0</b><span>separation violations in PHASE-D's 6 PX4 flights (V1.2: 11–24 per flight)</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="journey" id="journey">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">The journey</div>
+      <h2>Seven milestones</h2>
+      <p>Each milestone says what changed, why, and what the tests showed. Blue-outlined pipeline steps are new in that version; red outlines mark the step that caused trouble.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="spine"></div>
+      <div class="spine-fill" id="spineFill"></div>
+
+      <!-- CONCEPT -->
+      <article class="station" id="concept">
+        <div class="dot"></div>
+        <div class="card reveal">
+          <div class="meta"><span class="tag ver">Concept</span><span class="tag">3 Sep 2026</span><span class="tag">PHASE_V1.0.py</span></div>
+          <h3>Vehicles as billiard balls</h3>
+          <p>The first stable upload set the idea: plan each vehicle's route with
+            <span class="term" tabindex="0" data-tip="A* path planning inside a local frame (default 25 m) around the vehicle, so each plan only includes nearby vehicles.">localized A*</span>,
+            and only escalate when two vehicles' safety bubbles overlap. Then the lower-momentum vehicle sidesteps 90°, and a geometric solver
+            (<span class="term" tabindex="0" data-tip="Position-Based Dynamics: repeatedly pushes overlapping positions apart until the constraints hold. Pushes are weighted by momentum, so the lighter vehicle moves more.">PBD</span>)
+            pushes any remaining overlap apart. Momentum is priority × speed, like the mass of a ball.</p>
+          <div class="pipe">
+            <span class="step new">Intent<small>local A*</small></span><span class="arrow">→</span>
+            <span class="step new">Conflict<small>bubbles overlap</small></span><span class="arrow">→</span>
+            <span class="step new">Evasion<small>90° sidestep</small></span><span class="arrow">→</span>
+            <span class="step new">PBD<small>push apart</small></span><span class="arrow">→</span>
+            <span class="step new">Commit</span>
+          </div>
+          <button class="tech-btn" aria-expanded="false">Technical details <span class="chev">▾</span></button>
+          <div class="tech"><div><div class="tech-body">
+            <h4>Model</h4>
+            <ul>
+              <li>Kinematic point masses stepped at <code>dt = 0.2 s</code>; positions are set directly, so there is no acceleration limit.</li>
+              <li><code>momentum = priority × speed</code>. In a conflict, the share of the evasion each vehicle takes is weighted by the other's momentum.</li>
+              <li>Safety bubble: <code>marginᵢ + marginⱼ + 0.2 m</code>, checked on the positions proposed for the next tick.</li>
+              <li>Deflection: the 90° left or right turn whose target point is better for clearance and obstacles.</li>
+            </ul>
+            <h4>Repository history</h4>
+            <ul>
+              <li><code>241a0d4</code> First upload of stable version · <code>042ac79</code> refactor of <code>Simulation</code>, which removed localized PBD · DOI and <code>CITATION.cff</code> added.</li>
+              <li>Design write-up: <code>PHASE_Algorithm/Algorithm_Overview.md</code>.</li>
+            </ul>
+          </div></div></div>
+        </div>
+      </article>
+
+      <!-- V1.0 -->
+      <article class="station" id="v10">
+        <div class="dot"></div>
+        <div class="card reveal">
+          <div class="meta"><span class="tag ver">V1.0</span><span class="tag">13 Sep 2026</span><span class="tag good">safe</span><span class="tag warn">deadlocks</span></div>
+          <h3>A test suite puts it under pressure</h3>
+          <p>An autonomous test harness ran V1.0 on 173 cases: 23 hand-built adversarial scenarios plus 150 seeded random ones (mixed traffic, crossings, convergence).
+            Vehicles never got closer than allowed. The failures were vehicles that never arrived: symmetric encounters left them stuck facing each other.</p>
+          <div class="pipe">
+            <span class="step">Intent<small>local A*</small></span><span class="arrow">→</span>
+            <span class="step">Conflict<small>either vehicle NORMAL</small></span><span class="arrow">→</span>
+            <span class="step">Evasion<small>follow target, then replan</small></span><span class="arrow">→</span>
+            <span class="step">PBD<small>50 iterations, every tick</small></span><span class="arrow">→</span>
+            <span class="step">Commit</span>
+          </div>
+          <div class="tiles">
+            <div class="tile good"><b>18 / 22</b><span>shared deterministic cases passed</span></div>
+            <div class="tile good"><b>0</b><span>separation-violation ticks, all 173 cases</span></div>
+            <div class="tile"><b>7.3 s</b><span>mean delay per vehicle (shared cases)</span></div>
+            <div class="tile warn"><b>152 / 173</b><span>all cases passed</span></div>
+          </div>
+          <button class="tech-btn" aria-expanded="false">Technical details <span class="chev">▾</span></button>
+          <div class="tech"><div><div class="tech-body">
+            <h4>Mechanics</h4>
+            <ul>
+              <li>Conflict fires when bubbles overlap and at least one of the pair is <code>NORMAL</code>; both get a <code>DEFLECTING</code> target and follow it until reached, then replan with A*.</li>
+              <li>Global micro-PBD (“concrete-bounce fixed”): 50 iterations every tick, obstacles first, then vehicle pairs, momentum-weighted.</li>
+              <li>1,353 lines in <code>PHASE_V1.0/Testing/phase_altitude_locked.py</code> (altitude-locked 2D variant).</li>
+            </ul>
+            <h4>Failing cases</h4>
+            <div class="tbl-scroll"><table>
+              <tr><th>Case</th><th>Arrived</th><th>Reason</th></tr>
+              <tr><td>03_equal_head_on</td><td>0 / 2</td><td>equal momentum, symmetric stand-off</td></tr>
+              <tr><td>04_three_way_cross</td><td>1 / 3</td><td>symmetric stand-off</td></tr>
+              <tr><td>06_diagonal_cross</td><td>0 / 2</td><td>symmetric stand-off</td></tr>
+              <tr><td>11_pbd_cluster</td><td>1 / 3</td><td>cluster never untangles</td></tr>
+              <tr><td>23_original_manifest</td><td>36 / 41</td><td>5 stuck; 1 obstacle-penetration tick</td></tr>
+            </table></div>
+            <h4>Random cases</h4>
+            <p>150 cases: 134 passed, 0 separation-violation ticks, 22 obstacle-penetration ticks.
+              Source: <code>PHASE_V1.0/Testing/phase_test_results/</code>.</p>
+          </div></div></div>
+        </div>
+      </article>
+
+      <!-- V1.1 -->
+      <article class="station" id="v11">
+        <div class="dot"></div>
+        <div class="card reveal">
+          <div class="meta"><span class="tag ver">V1.1</span><span class="tag">14 Sep 2026</span><span class="tag good">more arrivals</span><span class="tag bad">safety regression</span></div>
+          <h3>Steer once, replan globally, and a lesson</h3>
+          <p>V1.1 attacked the stand-offs. Each conflict now steers only once per event, and after it every vehicle replans with A* from its corrected position.
+            More vehicles arrived (20 of 22 cases, up from 18), but the geometric solver now only ran when a <em>new</em> conflict appeared.
+            Between those moments nothing kept vehicles apart, and they touched.</p>
+          <div class="pipe">
+            <span class="step">Intent<small>route only, no global A*</small></span><span class="arrow">→</span>
+            <span class="step new">Conflict event<small>steer once per pair</small></span><span class="arrow">→</span>
+            <span class="step risk">PBD<small>1000 iterations, new conflicts only</small></span><span class="arrow">→</span>
+            <span class="step new">Global A* replan<small>all vehicles, from PBD positions</small></span><span class="arrow">→</span>
+            <span class="step">Commit</span>
+          </div>
+          <div class="pipe-legend"><span><i style="background:var(--series-1)"></i>new in this version</span><span><i style="background:var(--bad)"></i>caused the regression</span></div>
+          <div class="tiles">
+            <div class="tile bad"><b>14 / 22</b><span>shared deterministic cases passed</span></div>
+            <div class="tile bad"><b>54</b><span>separation-violation ticks (shared cases)</span></div>
+            <div class="tile bad"><b>0.0 m</b><span>closest approach (equal head-on)</span></div>
+            <div class="tile good"><b>3.4 s</b><span>mean delay, less than half of V1.0's</span></div>
+          </div>
+          <button class="tech-btn" aria-expanded="false">Technical details <span class="chev">▾</span></button>
+          <div class="tech"><div><div class="tech-body">
+            <h4>What changed</h4>
+            <ul>
+              <li><code>active_conflict_events</code>: a set of vehicle pairs. A pair steers only when it first enters the set and leaves it when the bubbles separate.</li>
+              <li>PBD raised to 1,000 iterations but wrapped in <code>if new_conflict_detected:</code>.</li>
+              <li>Phase 4, global A* replanning: every active vehicle replans from <code>prop_pos</code> (the PBD-resolved position), with all other vehicles as dynamic walls.</li>
+              <li>2,751 lines, the largest version.</li>
+            </ul>
+            <h4>Failing shared cases</h4>
+            <div class="tbl-scroll"><table>
+              <tr><th>Case</th><th>Violation ticks</th><th>Closest</th></tr>
+              <tr><td>16_grazing</td><td>32</td><td>2.1 m</td></tr>
+              <tr><td>03_equal_head_on</td><td>7</td><td>0.0 m</td></tr>
+              <tr><td>20_tight_corridor</td><td>7</td><td>2.2 m</td></tr>
+              <tr><td>07_momentum_extreme</td><td>4</td><td>3.0 m</td></tr>
+              <tr><td>02_head_on, 19_parallel_close</td><td>2 each</td><td>–</td></tr>
+              <tr><td>04_three_way_cross, 06_diagonal_cross</td><td>0</td><td>still stuck</td></tr>
+            </table></div>
+            <h4>Random cases</h4>
+            <p>30 run: 15 passed, 64 separation-violation ticks, 4,266 obstacle-penetration ticks.</p>
+            <h4>Lesson carried forward</h4>
+            <p>The safety projection has to run every tick, not only on events. V1.2 restores that.</p>
+          </div></div></div>
+        </div>
+      </article>
+
+      <!-- V1.2 -->
+      <article class="station" id="v12">
+        <div class="dot"></div>
+        <div class="card reveal">
+          <div class="meta"><span class="tag ver">V1.2</span><span class="tag">14 Sep 2026</span><span class="tag good">safe again</span><span class="tag good">fast</span></div>
+          <h3>Safety every tick, replanning only when needed</h3>
+          <p>V1.2 keeps V1.1's event-based steering but runs the solver on every tick again, and replans only when a new conflict appears.
+            It also detects deadlocks: equal-momentum pairs get a tie-break, and vehicles stuck in place are reported.
+            The result has V1.0's safety at V1.1's speed, in 768 lines.</p>
+          <div class="pipe">
+            <span class="step">Intent<small>local A*</small></span><span class="arrow">→</span>
+            <span class="step">Conflict event<small>+ 1.5× tie-break</small></span><span class="arrow">→</span>
+            <span class="step new">PBD<small>1000 iterations, every tick</small></span><span class="arrow">→</span>
+            <span class="step new">A* replan<small>only on new conflict</small></span><span class="arrow">→</span>
+            <span class="step new">Commit<small>+ deadlock detection</small></span>
+          </div>
+          <div class="tiles">
+            <div class="tile good"><b>18 / 22</b><span>shared deterministic cases passed</span></div>
+            <div class="tile good"><b>0</b><span>separation-violation ticks</span></div>
+            <div class="tile good"><b>8.2 m</b><span>closest approach</span></div>
+            <div class="tile good"><b>3.7 s</b><span>mean delay, half of V1.0's</span></div>
+          </div>
+          <button class="tech-btn" aria-expanded="false">Technical details <span class="chev">▾</span></button>
+          <div class="tech"><div><div class="tech-body">
+            <h4>What changed</h4>
+            <ul>
+              <li>Phase 3 runs unconditionally: <code>max_pbd_iters = 1000</code>, obstacles first, then pairs.</li>
+              <li>Symmetric deadlock: when two momenta are equal, the first vehicle's momentum is boosted 1.5× for the steering share and the PBD weights (logged once per pair).</li>
+              <li>Positional deadlock: a vehicle that moves less than 0.1 m for over 3 s is reported, and its recovery is logged.</li>
+              <li>Phase 4 replans every active vehicle, but only on ticks with a new conflict.</li>
+            </ul>
+            <h4>Still failing</h4>
+            <p><code>03_equal_head_on</code>, <code>04_three_way_cross</code>, <code>06_diagonal_cross</code> and <code>16_grazing</code>: all safe, but not every vehicle arrives.
+              Deadlocks are now <em>identified</em>, not yet resolved.</p>
+            <h4>Scope of the evidence</h4>
+            <p>The V1.2 suite was run on the deterministic cases only (22), no random cases. Source: <code>PHASE_V1.2/Testing/phase_test_results/</code>. The same file is the version flown on PX4 next.</p>
+          </div></div></div>
+        </div>
+      </article>
+
+      <!-- PX4 -->
+      <article class="station" id="px4">
+        <div class="dot"></div>
+        <div class="card reveal">
+          <div class="meta"><span class="tag ver">PX4 test</span><span class="tag">9–10 Nov 2026</span><span class="tag">V1.2 unchanged</span><span class="tag bad">violations</span></div>
+          <h3>Real flight dynamics enter the loop</h3>
+          <p>Three PX4 quadcopters (PX4 v1.17 SIH, software-in-the-loop) flew three scenarios at 10 m, while V1.2 ran live on their <em>measured</em> positions and sent offboard setpoints.
+            In the kinematic sim, PBD moves a vehicle instantly. A real quadcopter needs time and distance to change velocity, so the corrections arrived too late.</p>
+          <div class="pipe">
+            <span class="step new">PX4 SIH ×3<small>measured state</small></span><span class="arrow">→</span>
+            <span class="step">PHASE V1.2 stepper<small>paced on sim clock</small></span><span class="arrow">→</span>
+            <span class="step new">MAVSDK offboard<small>position + velocity</small></span><span class="arrow">→</span>
+            <span class="step new">Analyzer<small>separation, clearance, delay</small></span>
+          </div>
+          <div class="tiles">
+            <div class="tile bad"><b>1.79–4.21 m</b><span>closest approach (5.0 m required)</span></div>
+            <div class="tile bad"><b>11–24</b><span>violation ticks per flight</span></div>
+            <div class="tile bad"><b>2.01 / 2.34 m</b><span>obstacle clearance (2.7 m required)</span></div>
+            <div class="tile"><b>6</b><span>flights (2 per scenario)</span></div>
+          </div>
+          <button class="tech-btn" aria-expanded="false">Technical details <span class="chev">▾</span></button>
+          <div class="tech"><div><div class="tech-body">
+            <h4>Harness (<code>px4_sitl/</code>)</h4>
+            <ul>
+              <li><code>phase_stepper.py</code> loads V1.2 unmodified and runs its loop one tick at a time. <code>test_stepper_equivalence.py</code> proves it reproduces <code>Simulation.run()</code> exactly.</li>
+              <li><code>launch_sih.py</code> starts one SIH instance per drone (airframe 10040, <code>-i N</code>, spawn via <code>PX4_HOME_LAT/LON</code>).</li>
+              <li><code>phase_px4_bridge.py</code>: MAVSDK 3.17.4, take-off, shared ENU frame, offboard <code>set_position_velocity_ned</code> at 5 Hz, paced on PX4's simulation clock (SIH ran at about 0.83× real time).</li>
+              <li>Scenarios: <code>three_way_swap</code>, <code>head_on_cross</code> (priorities 10 / 1 / 5), <code>obstacle_choke</code> (6 m cylinder). Speed 4 m/s, margin 2.5 m.</li>
+            </ul>
+            <h4>Findings</h4>
+            <ul>
+              <li><b>F-01</b>: V1.2 violates separation on real dynamics. PBD's instant position corrections cannot be flown.</li>
+              <li><b>F-02</b>: kinematic livelock in the symmetric three-way swap.</li>
+              <li><b>F-03</b>: a deflection lasts one tick, because the replan on the same tick resets it.</li>
+            </ul>
+            <p>Full log: <a href="px4_sitl/CHANGELOG.md">px4_sitl/CHANGELOG.md</a> (entries H-01…H-11, F-01…F-03).</p>
+          </div></div></div>
+        </div>
+      </article>
+
+      <!-- PHASE-D -->
+      <article class="station" id="phased">
+        <div class="dot"></div>
+        <div class="card reveal">
+          <div class="meta"><span class="tag ver">PHASE-D</span><span class="tag">10 Nov 2026</span><span class="tag">experimental</span><span class="tag good">0 violations on PX4</span></div>
+          <h3>Billiard balls that know how to brake</h3>
+          <p>PHASE-D keeps PHASE's ideas and adds the physics a real vehicle has. Each safety ball grows with closing speed, reaction time and braking distance.
+            The lighter vehicle brakes first, and the heavier one brakes only for what remains. Sidesteps run to completion, and every new one follows the same rule.
+            Neighbours come from a spatial grid, so the cost grows with nearby vehicles rather than with every pair.</p>
+          <div class="pipe">
+            <span class="step new">Spatial grid<small>neighbours only</small></span><span class="arrow">→</span>
+            <span class="step new">Growing balls<small>speed + lag + braking</small></span><span class="arrow">→</span>
+            <span class="step new">Deflect<small>all neighbours, to completion</small></span><span class="arrow">→</span>
+            <span class="step new">Priority braking<small>lighter yields first</small></span><span class="arrow">→</span>
+            <span class="step new">Accel limits<small>braking first</small></span><span class="arrow">→</span>
+            <span class="step">PBD<small>last resort, bounded</small></span><span class="arrow">→</span>
+            <span class="step">Commit</span>
+          </div>
+          <div class="tiles">
+            <div class="tile good"><b>7.20–8.92 m</b><span>closest approach on PX4 (5.0 m required)</span></div>
+            <div class="tile good"><b>0</b><span>violation ticks in all 6 flights</span></div>
+            <div class="tile good"><b>2.88 / 2.84 m</b><span>obstacle clearance (2.7 m required)</span></div>
+            <div class="tile warn"><b>14–24</b><span>re-deflections per flight (open issue)</span></div>
+          </div>
+          <button class="tech-btn" aria-expanded="false">Technical details <span class="chev">▾</span></button>
+          <div class="tech"><div><div class="tech-body">
+            <h4>Equations</h4>
+<pre>Growing ball      Rᵢ = marginᵢ + cᵢ·(t_latency + τ) + cᵢ² / (2·a_brake)
+                  cᵢ = max(0, vᵢ·û)   (closing speed towards the other object)
+
+Safe closing      c_safe(g) = a_brake · ( −t + √(t² + 2g / a_brake) ),  t = t_latency + τ
+
+Lag-aware gap     g_eff = g − max(0, c_meas − c_cmd) · τ
+
+Priority braking  excess = c_cmd − c_safe(g_eff)
+                  lower momentum removes it first, higher removes the rest;
+                  obstacles never yield</pre>
+            <h4>Parameters (all D-11 flights)</h4>
+            <div class="tbl-scroll"><table>
+              <tr><th>Name</th><th>Value</th><th>Meaning</th></tr>
+              <tr><td><code>t_latency</code></td><td>0.25 s</td><td>command → actuation delay</td></tr>
+              <tr><td><code>tau_response</code></td><td>0.556 s</td><td>velocity time constant (1 / <code>MPC_XY_VEL_P_ACC</code> 1.8)</td></tr>
+              <tr><td><code>a_brake</code></td><td>2.5 m/s²</td><td>planned braking deceleration</td></tr>
+              <tr><td><code>a_cmd</code></td><td>3.0 m/s²</td><td>command acceleration limit (PX4 <code>MPC_ACC_HOR</code> 3)</td></tr>
+              <tr><td><code>astar_frame_size</code></td><td>15 m</td><td>planning frame for deflection scoring and replans</td></tr>
+            </table></div>
+            <h4>How each fix contributed (PX4, worst separation per flight)</h4>
+            <div class="tbl-scroll"><table>
+              <tr><th>Scenario</th><th>V1.2</th><th>D-05</th><th>D-09</th><th>D-11 (current)</th></tr>
+              <tr><td>three_way_swap</td><td>4.21 / 3.01</td><td>6.62 / 7.58</td><td>7.11 / 7.37</td><td><b>7.87 / 7.34</b></td></tr>
+              <tr><td>head_on_cross</td><td>2.21 / 1.79</td><td>4.36 / 7.46</td><td>8.02 / 7.39</td><td><b>7.20 / 7.63</b></td></tr>
+              <tr><td>obstacle_choke</td><td>3.12 / 3.20</td><td>7.27 / 8.51</td><td>7.54 / 9.07</td><td><b>8.92 / 8.81</b></td></tr>
+              <tr><td>Clearance</td><td>2.01 / 2.34</td><td>2.49 / 2.67</td><td>2.57 / 2.36</td><td><b>2.88 / 2.84</b></td></tr>
+            </table></div>
+            <h4>Change log</h4>
+            <ul>
+              <li><b>D-01–D-05</b>: growing balls, priority braking, persistent deflections, ramping from the commanded velocity, reaction time 0.8 s.</li>
+              <li><b>D-06</b>: deflection scored against every vehicle in the planning frame. <b>D-07</b>: <code>tau_response</code>.</li>
+              <li><b>D-08</b>: spatial hash grid for every neighbour query. <b>D-09</b>: replan only near the conflict.</li>
+              <li><b>D-11</b>: a waypoint counts as reached once passed, which stops acceleration-limited vehicles circling it. <b>H-11</b>: MAVSDK connect went from ~60 s to ~1 s.</li>
+            </ul>
+            <p>Design document: <a href="px4_sitl/PHASE_D.md">px4_sitl/PHASE_D.md</a> · code: <code>px4_sitl/phase_dynamic.py</code>, <code>spatial_grid.py</code> · 48 tests.</p>
+          </div></div></div>
+        </div>
+      </article>
+
+      <!-- NEXT -->
+      <article class="station planned" id="next">
+        <div class="dot"></div>
+        <div class="card reveal">
+          <div class="meta"><span class="tag ver">Next</span><span class="tag">proposed, not started</span></div>
+          <h3>What the evidence asks for next</h3>
+          <p>PHASE-D is safe in these flights but still busy: about half of its re-deflections end because a stall timer runs out, not because the conflict is solved.
+            The items below come from the known limitations; none of them has been built or tested yet.</p>
+          <div class="tiles">
+            <div class="tile"><b>Churn</b><span>sidestep relative to the goal, stall timer that allows for braking, keep the partner as an A* wall after a conflict</span></div>
+            <div class="tile"><b>Margin</b><span>explicit tracking-error allowance at obstacles (now 2.84–2.88 m vs 2.7 m)</span></div>
+            <div class="tile"><b>Evidence</b><span>more flights per scenario; find the cause of PX4's 3.1–3.6 m/s cruise vs 4 m/s commanded</span></div>
+            <div class="tile"><b>Scale</b><span>3D (not altitude-locked), larger PX4 fleets, then Gazebo and hardware</span></div>
+          </div>
+          <button class="tech-btn" aria-expanded="false">Technical details <span class="chev">▾</span></button>
+          <div class="tech"><div><div class="tech-body">
+            <h4>Why churn happens (from run analysis)</h4>
+            <ul>
+              <li>Large balls keep pairs “in conflict” for most of an encounter.</li>
+              <li>Braking slows a deflecting vehicle, the 1 s stall timer ends the deflection, and the still-active conflict starts a new one.</li>
+              <li>Each 90° turn is relative to the current heading, so turns compound into zigzags.</li>
+              <li>After a conflict clears, A* heads straight back through the other vehicle's area.</li>
+            </ul>
+            <h4>Physics check</h4>
+            <p>Real billiards explain the lighter vehicle yielding more and braking along the line of centres. They do not explain 90° turns relative to heading,
+              repeated collisions with the same partner (the goal-seeking A* acts like a bowl with no friction) or the stall-timer loop.</p>
+            <h4>Scaling</h4>
+            <p>At 1,000 vehicles a tick takes 208 ms in Python, right at the 200 ms real-time budget, so larger fleets need a faster implementation.</p>
+          </div></div></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="compare" id="compare">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Side by side</div>
+      <h2>The numbers</h2>
+      <p>Hover a bar or a point for details. Each chart has a table view.</p>
+    </div>
+
+    <div class="chart-card reveal">
+      <h3>Kinematic test suite: 22 shared deterministic cases</h3>
+      <p class="sub">The same 22 cases in all three versions (V1.0's extra 41-vehicle manifest case is left out). Simulated vehicles with no flight dynamics.</p>
+      <div class="multiples" id="suite"></div>
+      <details class="as-table"><summary>Show as table</summary>
+        <table><tr><th>Version</th><th>Passed</th><th>All goals reached</th><th>Violation ticks</th><th>Closest (m)</th><th>Mean delay (s)</th></tr>
+          <tr><td>V1.0</td><td>18</td><td>18</td><td>0</td><td>8.2</td><td>7.3</td></tr>
+          <tr><td>V1.1</td><td>14</td><td>20</td><td>54</td><td>0.0</td><td>3.4</td></tr>
+          <tr><td>V1.2</td><td>18</td><td>18</td><td>0</td><td>8.2</td><td>3.7</td></tr></table>
+      </details>
+    </div>
+
+    <div class="chart-card reveal">
+      <h3>PX4 flights: closest approach between any two quadcopters</h3>
+      <p class="sub">Measured positions from PX4 SIH, two flights per scenario. Bars must stay to the right of the 5.0 m line.</p>
+      <div class="legend"><span><i style="background:var(--series-1)"></i>V1.2</span><span><i style="background:var(--series-2)"></i>PHASE-D (D-11)</span></div>
+      <div id="sep"></div>
+      <details class="as-table"><summary>Show as table</summary>
+        <table><tr><th>Scenario</th><th>V1.2 flight 1</th><th>V1.2 flight 2</th><th>PHASE-D flight 1</th><th>PHASE-D flight 2</th></tr>
+          <tr><td>three_way_swap</td><td>4.21 m (24)</td><td>3.01 m (11)</td><td>7.87 m (0)</td><td>7.34 m (0)</td></tr>
+          <tr><td>head_on_cross</td><td>2.21 m (23)</td><td>1.79 m (24)</td><td>7.20 m (0)</td><td>7.63 m (0)</td></tr>
+          <tr><td>obstacle_choke</td><td>3.12 m (24)</td><td>3.20 m (13)</td><td>8.92 m (0)</td><td>8.81 m (0)</td></tr></table>
+        <p style="color:var(--text-muted)">In brackets: ticks below 5.0 m.</p>
+      </details>
+    </div>
+
+    <div class="chart-card reveal">
+      <h3>Cost per tick: spatial grid vs checking every pair</h3>
+      <p class="sub">PHASE-D tick time in Python on random traffic, log scales. The dashed line is the 200 ms budget for real time at dt = 0.2 s.</p>
+      <div class="legend"><span><i style="background:var(--series-2)"></i>Spatial grid, O(N·k)</span><span><i style="background:var(--series-1)"></i>Every pair, O(N²)</span></div>
+      <svg id="bench" viewBox="0 0 720 320" role="img" aria-label="Line chart of milliseconds per tick against number of vehicles"></svg>
+      <details class="as-table"><summary>Show as table</summary>
+        <table><tr><th>Vehicles</th><th>Grid (ms)</th><th>Every pair (ms)</th></tr>
+          <tr><td>10</td><td>0.5</td><td>0.7</td></tr><tr><td>30</td><td>2.6</td><td>6.8</td></tr>
+          <tr><td>100</td><td>10.2</td><td>67.2</td></tr><tr><td>300</td><td>44.6</td><td>589.8</td></tr>
+          <tr><td>1000</td><td>208.2</td><td>not run</td></tr></table>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="notes">
+  <div class="wrap">
+    <div class="section-head reveal"><div class="eyebrow">Reading the evidence</div><h2>What was actually run</h2></div>
+    <div class="notes-grid">
+      <div class="note reveal"><h4>Kinematic suite</h4><p>V1.0–V1.2 suite results come from PHASE's own simulator: vehicles move exactly where the algorithm puts them. It tests the logic, not flight.</p></div>
+      <div class="note reveal d1"><h4>PX4 SIH</h4><p>The PX4 flights are software-in-the-loop: the real PX4 flight stack with a built-in physics model, on one Mac. They are not Gazebo, and not hardware.</p></div>
+      <div class="note reveal d2"><h4>Sample size</h4><p>Two PX4 flights per scenario, three vehicles, altitude-locked 2D. Enough to show the V1.2 failure clearly, too few for statistics.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Sources</b> (paths relative to <code>PHASE_Algorithm/</code>):</p>
+    <ul>
+      <li>Suite results: <code>PHASE_V1.0/Testing/phase_test_results/</code>, <code>PHASE_V1.1/…</code>, <code>PHASE_V1.2/…</code> (<code>result.json</code> per case)</li>
+      <li>PX4 harness, change log and design: <a href="px4_sitl/README.md">px4_sitl/README.md</a>, <a href="px4_sitl/CHANGELOG.md">CHANGELOG.md</a>, <a href="px4_sitl/PHASE_D.md">PHASE_D.md</a></li>
+      <li>Algorithm overview: <a href="Algorithm_Overview.md">Algorithm_Overview.md</a></li>
+    </ul>
+    <p>Last updated 10 Nov 2026.</p>
+  </div>
+</footer>
+
+<div id="tip" role="tooltip"></div>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+  /* ---------- theme ---------- */
+  const root = document.documentElement;
+  try { const t = localStorage.getItem('phase-theme'); if (t) root.dataset.theme = t; } catch (e) {}
+  $('#theme').addEventListener('click', () => {
+    const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    root.dataset.theme = dark ? 'light' : 'dark';
+    try { localStorage.setItem('phase-theme', root.dataset.theme); } catch (e) {}
+    drawBench();
+  });
+
+  /* ---------- tooltip ---------- */
+  const tip = $('#tip');
+  function showTip(html, x, y) {
+    tip.innerHTML = html; tip.classList.add('show');
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    let left = Math.min(Math.max(8, x + 14), innerWidth - w - 8);
+    let top = y - h - 12; if (top < 8) top = y + 18;
+    tip.style.left = left + 'px'; tip.style.top = top + 'px';
+  }
+  const hideTip = () => tip.classList.remove('show');
+  function bindTip(el, html) {
+    el.addEventListener('mousemove', e => showTip(typeof html === 'function' ? html(e) : html, e.clientX, e.clientY));
+    el.addEventListener('mouseleave', hideTip);
+    el.addEventListener('focus', () => { const r = el.getBoundingClientRect(); showTip(typeof html === 'function' ? html() : html, r.left, r.top); });
+    el.addEventListener('blur', hideTip);
+  }
+  $$('.term').forEach(t => bindTip(t, `<b>${t.textContent}</b>${t.dataset.tip}`));
+
+  /* ---------- tech drawers ---------- */
+  const btns = $$('.tech-btn');
+  function setOpen(btn, open) {
+    btn.setAttribute('aria-expanded', open);
+    btn.nextElementSibling.classList.toggle('open', open);
+    btn.firstChild.textContent = open ? 'Hide technical details ' : 'Technical details ';
+  }
+  btns.forEach(b => b.addEventListener('click', () => {
+    setOpen(b, b.getAttribute('aria-expanded') !== 'true');
+    const all = btns.every(x => x.getAttribute('aria-expanded') === 'true');
+    $('#techAll').setAttribute('aria-pressed', all);
+  }));
+  $('#techAll').addEventListener('click', e => {
+    const on = e.currentTarget.getAttribute('aria-pressed') !== 'true';
+    e.currentTarget.setAttribute('aria-pressed', on);
+    btns.forEach(b => setOpen(b, on));
+  });
+
+  /* ---------- reveal + counters ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    io.unobserve(e.target);
+    if (e.target.classList.contains('in')) return;
+    e.target.classList.add('in');
+    $$('[data-count]', e.target).forEach(countUp);
+    if (e.target.matches('[data-count]')) countUp(e.target);
+  }), { threshold: .15, rootMargin: '0px 0px -40px 0px' });
+  $$('.reveal').forEach(el => io.observe(el));
+  function countUp(el) {
+    const end = +el.dataset.count; if (reduce || end === 0) { el.textContent = end; return; }
+    const t0 = performance.now(), dur = 900;
+    const f = now => { const p = Math.min(1, (now - t0) / dur); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(f); };
+    requestAnimationFrame(f);
+  }
+
+  /* ---------- spine progress + active station ---------- */
+  const timeline = $('.timeline'), fill = $('#spineFill');
+  const stations = $$('.station');
+  const links = $$('.stations a');
+  function onScroll() {
+    // backstop for the observer: reveal anything already on or above screen
+    $$('.reveal:not(.in)').forEach(el => {
+      if (el.getBoundingClientRect().top < innerHeight) { el.classList.add('in'); $$('[data-count]', el).forEach(countUp); }
+    });
+    $$('.barfill[data-w]:not(.zero)').forEach(b => {
+      if (!b.style.width && b.getBoundingClientRect().top < innerHeight * .85) b.style.width = b.dataset.w + '%';
+    });
+    const bench = document.getElementById('bench');
+    if (bench && !benchDrawn && bench.getBoundingClientRect().top < innerHeight * .7) {
+      benchDrawn = true; $$('#bench .ln').forEach(l => l.setAttribute('stroke-dashoffset', 0));
+    }
+    const r = timeline.getBoundingClientRect();
+    const mark = innerHeight * .55;
+    const h = Math.max(0, Math.min(r.height - 16, mark - r.top));
+    fill.style.height = h + 'px';
+    let current = null;
+    stations.forEach(s => {
+      const d = s.querySelector('.dot').getBoundingClientRect();
+      const passed = d.top < mark;
+      s.classList.toggle('passed', passed);
+      if (passed) current = s;
+    });
+    stations.forEach(s => s.classList.toggle('current', s === current));
+    let activeId = current ? current.id : null;
+    const cmp = $('#compare').getBoundingClientRect();
+    if (cmp.top < mark) activeId = 'compare';
+    links.forEach(a => {
+      const on = a.getAttribute('href') === '#' + activeId;
+      if (on && !a.classList.contains('active')) a.scrollIntoView({ block: 'nearest', inline: 'center', behavior: reduce ? 'auto' : 'smooth' });
+      a.classList.toggle('active', on);
+    });
+  }
+  let ticking = false;
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { onScroll(); ticking = false; }); } }, { passive: true });
+  addEventListener('resize', () => { onScroll(); drawBench(); });
+
+  /* ---------- chart 1: suite small multiples ---------- */
+  const suite = [
+    { title: 'Cases passed (of 22)', max: 22, unit: '', vals: [18, 14, 18], tips: ['18 of 22 passed; 4 had vehicles that never arrived', '14 of 22 passed; 20 had every vehicle arrive, but 8 broke separation', '18 of 22 passed; 0 violations, 4 still deadlock'] },
+    { title: 'Separation-violation ticks', max: 60, unit: '', vals: [0, 54, 0], tips: ['0 ticks closer than allowed', '54 ticks closer than allowed; worst 0.0 m in 03_equal_head_on', '0 ticks closer than allowed'] },
+    { title: 'Mean delay per vehicle (s)', max: 8, unit: ' s', vals: [7.3, 3.4, 3.7], tips: ['7.3 s average extra time to goal', '3.4 s average extra time to goal', '3.7 s average extra time to goal'] },
+  ];
+  const vers = ['V1.0', 'V1.1', 'V1.2'];
+  const suiteEl = $('#suite');
+  suite.forEach(m => {
+    const box = document.createElement('div');
+    box.innerHTML = `<h4>${m.title}</h4>` + m.vals.map((v, i) =>
+      `<div class="hrow"><span class="lab">${vers[i]}</span><div class="track"><div class="barfill${v === 0 ? ' zero' : ''}" data-w="${v / m.max * 100}"></div><div class="hit" tabindex="0"></div></div><span class="val">${v}${m.unit}</span></div>`).join('');
+    suiteEl.appendChild(box);
+    $$('.hit', box).forEach((h, i) => bindTip(h, `<b>${vers[i]}</b>${m.tips[i]}`));
+  });
+
+  /* ---------- chart 2: PX4 separation ---------- */
+  const sep = [
+    { name: 'three_way_swap', v12: [[4.21, 24], [3.01, 11]], d: [[7.87, 0], [7.34, 0]] },
+    { name: 'head_on_cross', v12: [[2.21, 23], [1.79, 24]], d: [[7.20, 0], [7.63, 0]] },
+    { name: 'obstacle_choke', v12: [[3.12, 24], [3.20, 13]], d: [[8.92, 0], [8.81, 0]] },
+  ];
+  const SMAX = 10;
+  const sepEl = $('#sep');
+  let html = '';
+  sep.forEach(s => {
+    html += `<div class="sep-group"><h4>${s.name}</h4><div class="sep-plot">`;
+    const rows = [['V1.2', 1, s.v12[0], ''], ['V1.2', 2, s.v12[1], ''], ['PHASE-D', 1, s.d[0], 's2'], ['PHASE-D', 2, s.d[1], 's2']];
+    rows.forEach(([v, f, [m, ticks], cls]) => {
+      html += `<div class="sep-row"><span class="lab">${v} · flight ${f}</span><div class="track"><div class="barfill ${cls}" data-w="${m / SMAX * 100}"></div><div class="hit" tabindex="0" data-tip="<b>${v}, ${s.name}, flight ${f}</b>Closest approach ${m.toFixed(2)} m · ${ticks} ticks below 5.0 m"></div></div><span class="val">${m.toFixed(2)} m</span></div>`;
+    });
+    html += `</div></div>`;
+  });
+  html += `<div class="axis"><span></span><div class="ticks">${[0, 2, 4, 6, 8, 10].map(t => `<span style="left:${t / SMAX * 100}%">${t} m</span>`).join('')}</div><span></span></div>`;
+  sepEl.innerHTML = html;
+  $$('.hit[data-tip]', sepEl).forEach(h => bindTip(h, h.dataset.tip));
+  // 5 m reference line across each group's track column
+  function placeRef() {
+    $$('.sep-plot', sepEl).forEach((p, gi) => {
+      let line = $('.refline', p);
+      if (!line) { line = document.createElement('div'); line.className = 'refline'; line.innerHTML = gi === 0 ? '<span>5.0 m required</span>' : ''; p.appendChild(line); }
+      const track = $('.track', p); const pr = p.getBoundingClientRect(), tr = track.getBoundingClientRect();
+      line.style.left = (tr.left - pr.left + tr.width * 5 / SMAX) + 'px';
+    });
+  }
+  placeRef(); addEventListener('resize', placeRef);
+  $$('.sep-group')[0].style.marginTop = '22px';
+
+  // grow bars when their card scrolls in
+  const barIO = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    $$('.barfill', e.target).forEach(b => { if (!b.classList.contains('zero')) b.style.width = b.dataset.w + '%'; });
+    barIO.unobserve(e.target);
+  }), { threshold: .25 });
+  barIO.observe(suiteEl); barIO.observe(sepEl);
+
+  /* ---------- chart 3: benchmark (log-log) ---------- */
+  const N = [10, 30, 100, 300, 1000];
+  const grid = [0.5, 2.6, 10.2, 44.6, 208.2];
+  const brute = [0.7, 6.8, 67.2, 589.8, null];
+  let benchDrawn = false;
+  function drawBench() {
+    const svg = $('#bench'); if (!svg) return;
+    const W = 720, H = 320, L = 56, R = 24, T = 16, B = 40;
+    const lx = v => L + (Math.log10(v) - 1) / 2 * (W - L - R);
+    const ly = v => T + (1 - (Math.log10(v) + 1) / 4) * (H - T - B); // 0.1 .. 1000 ms
+    const yt = [0.1, 1, 10, 100, 1000];
+    let s = '<g class="grid">' + yt.map(v => `<line x1="${L}" x2="${W - R}" y1="${ly(v)}" y2="${ly(v)}"/>`).join('') + '</g>';
+    s += yt.map(v => `<text x="${L - 8}" y="${ly(v) + 4}" text-anchor="end">${v} ms</text>`).join('');
+    s += N.map(n => `<text x="${lx(n)}" y="${H - B + 20}" text-anchor="middle">${n}</text>`).join('');
+    s += `<text x="${(L + W - R) / 2}" y="${H - 4}" text-anchor="middle">vehicles</text>`;
+    s += `<line x1="${L}" x2="${W - R}" y1="${ly(200)}" y2="${ly(200)}" stroke="${css('--text-muted')}" stroke-width="1.5" stroke-dasharray="5 4"/>`;
+    s += `<text x="${L + 8}" y="${ly(200) - 6}">200 ms real-time budget</text>`;
+    const path = arr => arr.map((v, i) => v == null ? '' : `${i === 0 ? 'M' : 'L'}${lx(N[i])},${ly(v)}`).join(' ');
+    const len = 900;
+    const anim = reduce || benchDrawn ? '' : `stroke-dasharray="${len}" stroke-dashoffset="${len}" style="transition:stroke-dashoffset 1.4s cubic-bezier(.2,.7,.2,1)"`;
+    s += `<path class="s1 ln" d="${path(brute)}" fill="none" stroke-width="2" ${anim}/>`;
+    s += `<path class="s2 ln" d="${path(grid)}" fill="none" stroke-width="2" ${anim}/>`;
+    const surf = css('--surface-1');
+    brute.forEach((v, i) => { if (v != null) s += `<circle cx="${lx(N[i])}" cy="${ly(v)}" r="4.5" fill="${css('--series-1')}" stroke="${surf}" stroke-width="2"/>`; });
+    grid.forEach((v, i) => { s += `<circle cx="${lx(N[i])}" cy="${ly(v)}" r="4.5" fill="${css('--series-2')}" stroke="${surf}" stroke-width="2"/>`; });
+    s += `<text x="${lx(300) + 8}" y="${ly(589.8) - 8}">every pair</text><text x="${lx(1000) - 8}" y="${ly(208.2) + 18}" text-anchor="end">grid</text>`;
+    s += `<line id="xhair" x1="0" x2="0" y1="${T}" y2="${H - B}" stroke="${css('--text-muted')}" stroke-width="1" opacity="0"/>`;
+    s += `<rect id="benchHit" x="${L}" y="${T}" width="${W - L - R}" height="${H - T - B}" fill="transparent"/>`;
+    svg.innerHTML = s;
+    const hit = $('#benchHit'), xh = $('#xhair');
+    hit.addEventListener('mousemove', e => {
+      const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+      const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+      let bi = 0; N.forEach((n, i) => { if (Math.abs(lx(n) - p.x) < Math.abs(lx(N[bi]) - p.x)) bi = i; });
+      xh.setAttribute('x1', lx(N[bi])); xh.setAttribute('x2', lx(N[bi])); xh.setAttribute('opacity', 1);
+      const speed = brute[bi] ? ` · ${(brute[bi] / grid[bi]).toFixed(1)}× faster` : '';
+      showTip(`<b>${N[bi]} vehicles</b>Grid ${grid[bi]} ms · every pair ${brute[bi] ?? 'not run'}${brute[bi] ? ' ms' : ''}${speed}`, e.clientX, e.clientY);
+    });
+    hit.addEventListener('mouseleave', () => { xh.setAttribute('opacity', 0); hideTip(); });
+    if (benchDrawn || reduce) $$('.ln', svg).forEach(l => { l.removeAttribute('stroke-dasharray'); l.removeAttribute('stroke-dashoffset'); });
+  }
+  drawBench();
+  const benchIO = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    benchDrawn = true;
+    $$('#bench .ln').forEach(l => l.setAttribute('stroke-dashoffset', 0));
+    benchIO.disconnect();
+  }), { threshold: .3 });
+  benchIO.observe($('#bench'));
+
+  /* ---------- hero toy: growing balls + priority braking ---------- */
+  const cv = $('#toy'), ctx = cv.getContext('2d');
+  let W = 0, H = 0, S = 1, balls = [], trailT = 0, doneFor = 0, flip = false, visible = true;
+  const MARGIN = 2.5, SPEED = 4, A_BRAKE = 2.5, A_CMD = 3, TL = 0.6; // metres, m/s, s (toy units)
+  function size() {
+    const r = cv.getBoundingClientRect(), dpr = Math.min(2, devicePixelRatio || 1);
+    W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    S = Math.min(W, H) / 64; // 64 m across
+  }
+  function reset() {
+    const cols = [css('--series-1'), css('--series-2'), css('--series-3')];
+    const prio = [3, 2, 1];
+    balls = [0, 1, 2].map(i => {
+      const a = -Math.PI / 2 + i * 2 * Math.PI / 3 + (flip ? Math.PI / 9 : 0);
+      const st = [Math.cos(a) * 24, Math.sin(a) * 24], gl = [-st[0], -st[1]];
+      return { p: st.slice(), g: gl, v: [0, 0], prio: prio[i], col: cols[i], trail: [], R: MARGIN, def: null, defT: 0 };
+    });
+    flip = !flip; doneFor = 0;
+  }
+  const sub = (a, b) => [a[0] - b[0], a[1] - b[1]], dot = (a, b) => a[0] * b[0] + a[1] * b[1];
+  const len = a => Math.hypot(a[0], a[1]), scl = (a, k) => [a[0] * k, a[1] * k];
+  const unit = a => { const l = len(a); return l > 1e-6 ? scl(a, 1 / l) : [0, 0]; };
+  function step(dt) {
+    const mom = b => b.prio * SPEED;
+    // desired velocities (goal or active deflection)
+    balls.forEach(b => {
+      const tgt = b.def || b.g, d = sub(tgt, b.p), dist = len(d);
+      const vmax = b.def ? SPEED : Math.min(SPEED, Math.sqrt(2 * A_BRAKE * Math.max(0, len(sub(b.g, b.p)) - .05)));
+      b.des = scl(unit(d), Math.min(vmax, dist / dt));
+      if (b.def) { b.defT += dt; if (dist < .6 || b.defT > 2.2) { b.def = null; } }
+    });
+    // growing balls, conflict → deflection of lighter vehicle, priority braking
+    for (let i = 0; i < 3; i++) for (let j = i + 1; j < 3; j++) {
+      const a = balls[i], b = balls[j];
+      const u = unit(sub(b.p, a.p)), d = len(sub(b.p, a.p));
+      const ca = Math.max(0, dot(a.v, u)), cb = Math.max(0, dot(b.v, scl(u, -1)));
+      a.Rp = Math.max(a.Rp || 0, MARGIN + ca * TL + ca * ca / (2 * A_BRAKE));
+      b.Rp = Math.max(b.Rp || 0, MARGIN + cb * TL + cb * cb / (2 * A_BRAKE));
+      const touch = d < MARGIN + ca * TL + ca * ca / (2 * A_BRAKE) + MARGIN + cb * TL + cb * cb / (2 * A_BRAKE);
+      const lo = mom(a) <= mom(b) ? a : b, hi = lo === a ? b : a;
+      if (touch && !lo.def) {
+        const h = unit(len(lo.v) > .2 ? lo.v : sub(lo.g, lo.p));
+        const away = unit(sub(lo.p, hi.p));
+        const left = [-h[1], h[0]], right = [h[1], -h[0]];
+        const side = dot(left, away) >= dot(right, away) ? left : right;
+        lo.def = [lo.p[0] + side[0] * 7 + h[0] * 2, lo.p[1] + side[1] * 7 + h[1] * 2]; lo.defT = 0;
+      }
+      // braking along the line of centres: lower momentum yields first
+      const g = d - 2 * MARGIN;
+      const csafe = g <= 0 ? 0 : A_BRAKE * (-TL + Math.sqrt(TL * TL + 2 * g / A_BRAKE));
+      const uLo = lo === a ? u : scl(u, -1);
+      const close = dot(a.des, u) - dot(b.des, u);
+      let excess = close - csafe;
+      if (excess > 0) {
+        const cLo = Math.max(0, dot(lo.des, uLo));
+        const takeLo = Math.min(excess, cLo + SPEED);
+        lo.des = sub(lo.des, scl(uLo, takeLo)); excess -= takeLo;
+        if (excess > 0) hi.des = sub(hi.des, scl(scl(uLo, -1), excess));
+      }
+    }
+    // acceleration limit, integrate
+    balls.forEach(b => {
+      const dv = sub(b.des, b.v), m = len(dv), lim = A_CMD * 1.6 * dt;
+      b.v = m > lim ? [b.v[0] + dv[0] / m * lim, b.v[1] + dv[1] / m * lim] : b.des;
+      b.p = [b.p[0] + b.v[0] * dt, b.p[1] + b.v[1] * dt];
+      b.R += ((b.Rp || MARGIN) - b.R) * Math.min(1, dt * 6); b.Rp = 0;
+    });
+    trailT += dt;
+    if (trailT > .12) { trailT = 0; balls.forEach(b => { b.trail.push(b.p.slice()); if (b.trail.length > 90) b.trail.shift(); }); }
+    if (balls.every(b => len(sub(b.g, b.p)) < .4)) doneFor += dt;
+    if (doneFor > 1.4) reset();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const X = p => W / 2 + p[0] * S, Y = p => H / 2 - 8 + p[1] * S;
+    ctx.strokeStyle = css('--line'); ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(W / 2, H / 2 - 8, 24 * S, 0, Math.PI * 2); ctx.setLineDash([3, 5]); ctx.stroke(); ctx.setLineDash([]);
+    balls.forEach(b => {
+      ctx.strokeStyle = b.col; ctx.globalAlpha = .35; ctx.lineWidth = 2; ctx.beginPath();
+      b.trail.forEach((p, i) => i ? ctx.lineTo(X(p), Y(p)) : ctx.moveTo(X(p), Y(p))); ctx.lineTo(X(b.p), Y(b.p)); ctx.stroke();
+      ctx.globalAlpha = 1;
+      // goal
+      ctx.strokeStyle = b.col; ctx.lineWidth = 2; const gx = X(b.g), gy = Y(b.g);
+      ctx.beginPath(); ctx.moveTo(gx - 4, gy - 4); ctx.lineTo(gx + 4, gy + 4); ctx.moveTo(gx + 4, gy - 4); ctx.lineTo(gx - 4, gy + 4); ctx.stroke();
+      // growing ball
+      ctx.globalAlpha = .14; ctx.fillStyle = b.col; ctx.beginPath(); ctx.arc(X(b.p), Y(b.p), b.R * S, 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = .7; ctx.strokeStyle = b.col; ctx.lineWidth = 1.5; ctx.stroke(); ctx.globalAlpha = 1;
+      // vehicle
+      ctx.fillStyle = b.col; ctx.beginPath(); ctx.arc(X(b.p), Y(b.p), 5.5, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = css('--surface-1'); ctx.lineWidth = 2; ctx.stroke();
+      ctx.fillStyle = css('--text-secondary'); ctx.font = '11px ' + css('--sans');
+      ctx.fillText('p' + b.prio, X(b.p) + 9, Y(b.p) - 8);
+    });
+  }
+  size(); reset();
+  if (reduce) { for (let k = 0; k < 400; k++) step(1 / 30); draw(); }
+  else {
+    let last = performance.now();
+    const loop = now => {
+      let dt = Math.min(.5, (now - last) / 1000) * 1.6; last = now;
+      if (visible) { while (dt > 1e-4) { const h = Math.min(1 / 60, dt); step(h); dt -= h; } draw(); }
+      requestAnimationFrame(loop);
+    };
+    requestAnimationFrame(loop);
+    new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(cv);
+  }
+  addEventListener('resize', () => { size(); draw(); });
+
+  onScroll();
+})();
+</script>
+</body>
+</html>
