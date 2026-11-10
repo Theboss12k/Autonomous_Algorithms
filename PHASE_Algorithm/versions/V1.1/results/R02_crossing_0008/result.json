@@ -1,0 +1,489 @@
+{
+  "summary": {
+    "case_name": "R02_crossing_0008",
+    "category": "random_crossing",
+    "seed": 110008,
+    "simulation_error": false,
+    "all_goals_reached": true,
+    "center_to_center_violations": 9,
+    "obstacle_penetration_violations": 0,
+    "current_safety_checks_pass": false,
+    "strict_diagnostic_pass": false,
+    "steering_events": 45,
+    "min_center_to_center_distance_m": 2.379730414836182,
+    "min_obstacle_clearance_m": null,
+    "average_delay_s": 5.652540190955284,
+    "total_delay_sum_s": 50.872861718597555,
+    "vehicles_reached": 9,
+    "vehicle_count": 9,
+    "dt_s": 0.2,
+    "allow_3d": false
+  },
+  "goals": [
+    {
+      "vehicle": "X00",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 7.44173566174767,
+      "actual_time": 13.399999999999984,
+      "delay": 5.958264338252314
+    },
+    {
+      "vehicle": "X01",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 7.059160775294248,
+      "actual_time": 12.634277896933451,
+      "delay": 5.575117121639203
+    },
+    {
+      "vehicle": "X02",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 15.725384354981577,
+      "actual_time": 20.477223367789477,
+      "delay": 4.751839012807901
+    },
+    {
+      "vehicle": "X03",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 10.099316010455453,
+      "actual_time": 15.599999999999977,
+      "delay": 5.500683989544523
+    },
+    {
+      "vehicle": "X04",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.29575531545920397,
+      "ideal_time": 9.445083944947426,
+      "actual_time": 16.799999999999972,
+      "delay": 7.354916055052547
+    },
+    {
+      "vehicle": "X05",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 12.788429292662169,
+      "actual_time": 18.599999999999966,
+      "delay": 5.811570707337797
+    },
+    {
+      "vehicle": "X06",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 18.53595285059035,
+      "actual_time": 26.599999999999937,
+      "delay": 8.064047149409589
+    },
+    {
+      "vehicle": "X07",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 25.28258507821897,
+      "actual_time": 28.79999999999993,
+      "delay": 3.5174149217809614
+    },
+    {
+      "vehicle": "X08",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 12.660991577227252,
+      "actual_time": 16.99999999999997,
+      "delay": 4.33900842277272
+    }
+  ],
+  "vehicle_metrics": [
+    {
+      "vehicle": "X00",
+      "ideal_time_s": 7.44173566174767,
+      "actual_time_s": 13.399999999999984,
+      "delay_s": 5.958264338252314,
+      "original_path_length_m": 203.21974770227413,
+      "resolved_path_length_m": 224.32424373352615,
+      "start_time_s": 0.0,
+      "speed": 27.308111566885266,
+      "priority": 59.20682770772648,
+      "momentum": 1616.8266565639485,
+      "margin": 7.738898291010536,
+      "steering_events": 2,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "X01",
+      "ideal_time_s": 7.059160775294248,
+      "actual_time_s": 12.634277896933451,
+      "delay_s": 5.575117121639203,
+      "original_path_length_m": 206.4269247700609,
+      "resolved_path_length_m": 227.43849001841292,
+      "start_time_s": 7.365722103066511,
+      "speed": 29.24241724207739,
+      "priority": 2.873923354956388,
+      "momentum": 84.04046586738558,
+      "margin": 5.633364315396188,
+      "steering_events": 1,
+      "state_changes_recorded": 1465
+    },
+    {
+      "vehicle": "X02",
+      "ideal_time_s": 15.725384354981577,
+      "actual_time_s": 20.477223367789477,
+      "delay_s": 4.751839012807901,
+      "original_path_length_m": 202.12084824616943,
+      "resolved_path_length_m": 220.10278949941465,
+      "start_time_s": 4.122776632210466,
+      "speed": 12.85315790593954,
+      "priority": 1.3994128338940497,
+      "momentum": 17.98687412963856,
+      "margin": 4.207238112792122,
+      "steering_events": 1,
+      "state_changes_recorded": 1481
+    },
+    {
+      "vehicle": "X03",
+      "ideal_time_s": 10.099316010455453,
+      "actual_time_s": 15.599999999999977,
+      "delay_s": 5.500683989544523,
+      "original_path_length_m": 201.2821162790642,
+      "resolved_path_length_m": 249.8237430283178,
+      "start_time_s": 0.0,
+      "speed": 19.930272116516026,
+      "priority": 24.52154205863806,
+      "momentum": 488.72100594524915,
+      "margin": 3.835749693417127,
+      "steering_events": 9,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "X04",
+      "ideal_time_s": 9.445083944947426,
+      "actual_time_s": 16.799999999999972,
+      "delay_s": 7.354916055052547,
+      "original_path_length_m": 200.67628152342024,
+      "resolved_path_length_m": 273.0121050663331,
+      "start_time_s": 0.0,
+      "speed": 21.246638218686286,
+      "priority": 9.091481987366585,
+      "momentum": 193.16342865728083,
+      "margin": 6.729684442528756,
+      "steering_events": 4,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "X05",
+      "ideal_time_s": 12.788429292662169,
+      "actual_time_s": 18.599999999999966,
+      "delay_s": 5.811570707337797,
+      "original_path_length_m": 201.09884101034783,
+      "resolved_path_length_m": 256.07118993705495,
+      "start_time_s": 0.0,
+      "speed": 15.725061804559191,
+      "priority": 1.0874289304574958,
+      "momentum": 17.09988713950982,
+      "margin": 4.413357792367313,
+      "steering_events": 14,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "X06",
+      "ideal_time_s": 18.53595285059035,
+      "actual_time_s": 26.599999999999937,
+      "delay_s": 8.064047149409589,
+      "original_path_length_m": 206.53439654920146,
+      "resolved_path_length_m": 232.5448631304252,
+      "start_time_s": 0.0,
+      "speed": 11.142367388068944,
+      "priority": 61.653741475727095,
+      "momentum": 686.9686383715753,
+      "margin": 5.735198252055742,
+      "steering_events": 5,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "X07",
+      "ideal_time_s": 25.28258507821897,
+      "actual_time_s": 28.79999999999993,
+      "delay_s": 3.5174149217809614,
+      "original_path_length_m": 204.03973795556797,
+      "resolved_path_length_m": 216.18478948613898,
+      "start_time_s": 0.0,
+      "speed": 8.070366907668346,
+      "priority": 0.5598639855499355,
+      "momentum": 4.518307781777509,
+      "margin": 6.643956984913083,
+      "steering_events": 1,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "X08",
+      "ideal_time_s": 12.660991577227252,
+      "actual_time_s": 16.99999999999997,
+      "delay_s": 4.33900842277272,
+      "original_path_length_m": 200.26274209117543,
+      "resolved_path_length_m": 247.5103833052699,
+      "start_time_s": 0.0,
+      "speed": 15.817303160629132,
+      "priority": 9.978109249979198,
+      "momentum": 157.82677897679875,
+      "margin": 5.624388857842041,
+      "steering_events": 8,
+      "state_changes_recorded": 1501
+    }
+  ],
+  "safety": {
+    "center_to_center": {
+      "violations": [
+        {
+          "time": 14.6,
+          "vehicle_a": "X01",
+          "vehicle_b": "X06",
+          "distance": 10.657208936081446,
+          "allowed": 11.36856256745193,
+          "threshold_used_by_current_check": 11.318562567451929,
+          "position_a": [
+            -12.0,
+            18.0,
+            10.0
+          ],
+          "position_b": [
+            -12.972496723420072,
+            7.387255188678499,
+            10.0
+          ]
+        },
+        {
+          "time": 14.8,
+          "vehicle_a": "X01",
+          "vehicle_b": "X06",
+          "distance": 9.229843969718075,
+          "allowed": 11.36856256745193,
+          "threshold_used_by_current_check": 11.318562567451929,
+          "position_a": [
+            -15.0,
+            18.0,
+            10.0
+          ],
+          "position_b": [
+            -14.716519969226354,
+            8.774510377356998,
+            10.0
+          ]
+        },
+        {
+          "time": 15.0,
+          "vehicle_a": "X01",
+          "vehicle_b": "X06",
+          "distance": 4.961851907125364,
+          "allowed": 11.36856256745193,
+          "threshold_used_by_current_check": 11.318562567451929,
+          "position_a": [
+            -18.0,
+            15.0,
+            10.0
+          ],
+          "position_b": [
+            -16.306264591600996,
+            10.336178100036507,
+            10.0
+          ]
+        },
+        {
+          "time": 15.2,
+          "vehicle_a": "X01",
+          "vehicle_b": "X06",
+          "distance": 3.1056713083745198,
+          "allowed": 11.36856256745193,
+          "threshold_used_by_current_check": 11.318562567451929,
+          "position_a": [
+            -21.0,
+            12.0,
+            10.0
+          ],
+          "position_b": [
+            -17.89600921397564,
+            11.897845822716016,
+            10.0
+          ]
+        },
+        {
+          "time": 15.8,
+          "vehicle_a": "X04",
+          "vehicle_b": "X08",
+          "distance": 9.486832980505138,
+          "allowed": 12.354073300370796,
+          "threshold_used_by_current_check": 12.304073300370796,
+          "position_a": [
+            84.0,
+            6.0,
+            10.0
+          ],
+          "position_b": [
+            87.0,
+            -3.0,
+            10.0
+          ]
+        },
+        {
+          "time": 16.0,
+          "vehicle_a": "X04",
+          "vehicle_b": "X08",
+          "distance": 7.123426338577426,
+          "allowed": 12.354073300370796,
+          "threshold_used_by_current_check": 12.304073300370796,
+          "position_a": [
+            87.0,
+            6.0,
+            10.0
+          ],
+          "position_b": [
+            89.23690446499286,
+            -0.7630955350071456,
+            10.0
+          ]
+        },
+        {
+          "time": 16.2,
+          "vehicle_a": "X04",
+          "vehicle_b": "X08",
+          "distance": 6.0,
+          "allowed": 12.354073300370796,
+          "threshold_used_by_current_check": 12.304073300370796,
+          "position_a": [
+            90.0,
+            6.0,
+            10.0
+          ],
+          "position_b": [
+            90.0,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "time": 16.4,
+          "vehicle_a": "X04",
+          "vehicle_b": "X08",
+          "distance": 3.0,
+          "allowed": 12.354073300370796,
+          "threshold_used_by_current_check": 12.304073300370796,
+          "position_a": [
+            93.0,
+            3.0,
+            10.0
+          ],
+          "position_b": [
+            93.0,
+            0.0,
+            10.0
+          ]
+        },
+        {
+          "time": 16.6,
+          "vehicle_a": "X04",
+          "vehicle_b": "X08",
+          "distance": 2.379730414836182,
+          "allowed": 12.354073300370796,
+          "threshold_used_by_current_check": 12.304073300370796,
+          "position_a": [
+            96.0,
+            3.0,
+            10.0
+          ],
+          "position_b": [
+            96.10162074237554,
+            0.6224403115767144,
+            10.0
+          ]
+        }
+      ],
+      "count": 9,
+      "minimum_distance_m": 2.379730414836182,
+      "rule": "distance < (margin_i + margin_j - 0.05)"
+    },
+    "obstacle_diagnostic": {
+      "violations": [],
+      "count": 0,
+      "minimum_clearance_m": null,
+      "rule": "distance_to_obstacle_center - (radius + vehicle_margin) < 0"
+    },
+    "goals": [
+      {
+        "vehicle": "X00",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 7.44173566174767,
+        "actual_time": 13.399999999999984,
+        "delay": 5.958264338252314
+      },
+      {
+        "vehicle": "X01",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 7.059160775294248,
+        "actual_time": 12.634277896933451,
+        "delay": 5.575117121639203
+      },
+      {
+        "vehicle": "X02",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 15.725384354981577,
+        "actual_time": 20.477223367789477,
+        "delay": 4.751839012807901
+      },
+      {
+        "vehicle": "X03",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 10.099316010455453,
+        "actual_time": 15.599999999999977,
+        "delay": 5.500683989544523
+      },
+      {
+        "vehicle": "X04",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.29575531545920397,
+        "ideal_time": 9.445083944947426,
+        "actual_time": 16.799999999999972,
+        "delay": 7.354916055052547
+      },
+      {
+        "vehicle": "X05",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 12.788429292662169,
+        "actual_time": 18.599999999999966,
+        "delay": 5.811570707337797
+      },
+      {
+        "vehicle": "X06",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 18.53595285059035,
+        "actual_time": 26.599999999999937,
+        "delay": 8.064047149409589
+      },
+      {
+        "vehicle": "X07",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 25.28258507821897,
+        "actual_time": 28.79999999999993,
+        "delay": 3.5174149217809614
+      },
+      {
+        "vehicle": "X08",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 12.660991577227252,
+        "actual_time": 16.99999999999997,
+        "delay": 4.33900842277272
+      }
+    ]
+  },
+  "original_verify_manifest_output": "safety_report.txt",
+  "plot": {
+    "html": "R02_crossing_0008.html",
+    "png": "R02_crossing_0008.png"
+  }
+}

@@ -1,0 +1,46 @@
+
+================================================================================
+SIMULATION MANIFEST VERIFICATION (TIME/DELAY ANALYSIS)
+PBD Mode: GLOBAL (Entire Map)
+================================================================================
+✅ Veh A          reached. [Ideal:  5.00s | Actual:  6.80s | Delay: + 1.80s]
+✅ Veh B          reached. [Ideal:  5.00s | Actual:  6.80s | Delay: + 1.80s]
+
+🟢 ALL drones successfully reached their destinations.
+--------------------------------------------------------------------------------
+COLLISION MARGIN CHECK (Center-to-Center)
+⚠️ VIOLATION at t=0.4s | Veh A & B | Dist: 9.05m (Allowed: 10.00m)
+⚠️ VIOLATION at t=0.6s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=0.8s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=1.0s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=1.2s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=1.4s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=1.6s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=1.8s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=2.0s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=2.2s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=2.4s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=2.6s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=2.8s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=3.0s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=3.2s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=3.4s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=3.6s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=3.8s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=4.0s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=4.2s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=4.4s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=4.6s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=4.8s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=5.0s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=5.2s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=5.4s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=5.6s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=5.8s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=6.0s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=6.2s | Veh A & B | Dist: 9.00m (Allowed: 10.00m)
+⚠️ VIOLATION at t=6.4s | Veh A & B | Dist: 3.34m (Allowed: 10.00m)
+⚠️ VIOLATION at t=6.6s | Veh A & B | Dist: 2.05m (Allowed: 10.00m)
+🔴 WARNING: 32 mid-air margin violations detected.
+================================================================================
+

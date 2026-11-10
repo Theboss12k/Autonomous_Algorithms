@@ -27,9 +27,10 @@ from mavsdk import System  # noqa: E402
 from mavsdk.offboard import OffboardError, PositionNedYaw, VelocityNedYaw  # noqa: E402
 
 import geo  # noqa: E402
-import scenarios  # noqa: E402
-from phase_dynamic import T_LATENCY, TAU_RESPONSE, make_dynamic_stepper_class  # noqa: E402
-from phase_stepper import load_phase, make_stepper_class  # noqa: E402
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # PHASE_Algorithm/, home of phase_d
+from phase_d import scenarios  # noqa: E402
+from phase_d.phase_dynamic import T_LATENCY, TAU_RESPONSE, make_dynamic_stepper_class  # noqa: E402
+from phase_d.phase_stepper import load_phase, make_stepper_class  # noqa: E402
 
 VARIANTS = {"v12": make_stepper_class, "phase_d": make_dynamic_stepper_class}
 

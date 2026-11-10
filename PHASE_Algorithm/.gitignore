@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.DS_Store
+# PX4 flight logs and local run output (large; regenerate with the scripts)
+px4_sitl/runs/
+phase_d/runs/
+test_suite/output/

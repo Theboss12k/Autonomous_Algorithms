@@ -14,13 +14,15 @@ import csv
 import io
 import json
 import os
+import sys
 from pathlib import Path
 
 import numpy as np
 
-import scenarios
-from phase_dynamic import make_dynamic_stepper_class
-from phase_stepper import load_phase
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # PHASE_Algorithm/, home of phase_d
+from phase_d import scenarios
+from phase_d.phase_dynamic import make_dynamic_stepper_class
+from phase_d.phase_stepper import load_phase
 
 VIOLATION_TOL = 0.05  # same tolerance as PHASE's verify_manifest()
 

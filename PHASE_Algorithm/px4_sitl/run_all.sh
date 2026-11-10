@@ -5,13 +5,18 @@
 # takes control (bridge exit 3), e.g. an intermittent SIH sensor timeout.
 set -uo pipefail
 cd "$(dirname "$0")"
-PY=".venv/bin/python -u"
+# Python: $PYTHON if set, else the PHASE_Algorithm/.venv, else a local .venv, else python3
+if [ -n "${PYTHON:-}" ]; then PYBIN=$PYTHON
+elif [ -x ../.venv/bin/python ]; then PYBIN=../.venv/bin/python
+elif [ -x .venv/bin/python ]; then PYBIN=.venv/bin/python
+else PYBIN=python3; fi
+PY="$PYBIN -u"
 RETRIES=${RETRIES:-2}
 VARIANT=${VARIANT:-v12}
 RUN="runs/$(date +%Y%m%d_%H%M%S)_$VARIANT"
 mkdir -p "$RUN"
 SCEN=("$@")
-[ ${#SCEN[@]} -eq 0 ] && SCEN=($($PY -c "import scenarios; print(' '.join(scenarios.SCENARIOS))"))
+[ ${#SCEN[@]} -eq 0 ] && SCEN=($(cd .. && $PY -c "from phase_d import scenarios; print(' '.join(scenarios.SCENARIOS))"))
 FILTER="fork_posix|mavsdk-grpc|pin 'mavsdk|migration.html|from mavsdk|FutureWarning"
 
 stop_px4() {

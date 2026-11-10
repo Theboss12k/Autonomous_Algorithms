@@ -1,0 +1,202 @@
+{
+  "summary": {
+    "case_name": "10_chain",
+    "category": "deterministic",
+    "seed": null,
+    "simulation_error": false,
+    "all_goals_reached": true,
+    "center_to_center_violations": 0,
+    "obstacle_penetration_violations": 0,
+    "current_safety_checks_pass": true,
+    "strict_diagnostic_pass": true,
+    "steering_events": 11,
+    "min_center_to_center_distance_m": 24.199999999705273,
+    "min_obstacle_clearance_m": null,
+    "average_delay_s": 9.026666666666655,
+    "total_delay_sum_s": 45.133333333333276,
+    "vehicles_reached": 5,
+    "vehicle_count": 5,
+    "dt_s": 0.2,
+    "allow_3d": false
+  },
+  "goals": [
+    {
+      "vehicle": "CHAIN_0",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 3.3333333333333335,
+      "actual_time": 8.8,
+      "delay": 5.466666666666667
+    },
+    {
+      "vehicle": "CHAIN_1",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 3.3333333333333335,
+      "actual_time": 13.399999999999984,
+      "delay": 10.06666666666665
+    },
+    {
+      "vehicle": "CHAIN_2",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.08276253029821858,
+      "ideal_time": 3.3333333333333335,
+      "actual_time": 11.199999999999992,
+      "delay": 7.866666666666658
+    },
+    {
+      "vehicle": "CHAIN_3",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.08276253029821858,
+      "ideal_time": 3.3333333333333335,
+      "actual_time": 15.599999999999977,
+      "delay": 12.266666666666643
+    },
+    {
+      "vehicle": "CHAIN_4",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 3.3333333333333335,
+      "actual_time": 12.799999999999986,
+      "delay": 9.466666666666653
+    }
+  ],
+  "vehicle_metrics": [
+    {
+      "vehicle": "CHAIN_0",
+      "ideal_time_s": 3.3333333333333335,
+      "actual_time_s": 8.8,
+      "delay_s": 5.466666666666667,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 184.2259461611303,
+      "start_time_s": 0.0,
+      "speed": 30.0,
+      "priority": 1.0,
+      "momentum": 30.0,
+      "margin": 12.0,
+      "steering_events": 1,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "CHAIN_1",
+      "ideal_time_s": 3.3333333333333335,
+      "actual_time_s": 13.399999999999984,
+      "delay_s": 10.06666666666665,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 264.5645162748825,
+      "start_time_s": 0.0,
+      "speed": 30.0,
+      "priority": 1.0,
+      "momentum": 30.0,
+      "margin": 12.0,
+      "steering_events": 2,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "CHAIN_2",
+      "ideal_time_s": 3.3333333333333335,
+      "actual_time_s": 11.199999999999992,
+      "delay_s": 7.866666666666658,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 248.6207019042247,
+      "start_time_s": 0.0,
+      "speed": 30.0,
+      "priority": 1.0,
+      "momentum": 30.0,
+      "margin": 12.0,
+      "steering_events": 2,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "CHAIN_3",
+      "ideal_time_s": 3.3333333333333335,
+      "actual_time_s": 15.599999999999977,
+      "delay_s": 12.266666666666643,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 327.08511400526083,
+      "start_time_s": 0.0,
+      "speed": 30.0,
+      "priority": 1.0,
+      "momentum": 30.0,
+      "margin": 12.0,
+      "steering_events": 3,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "CHAIN_4",
+      "ideal_time_s": 3.3333333333333335,
+      "actual_time_s": 12.799999999999986,
+      "delay_s": 9.466666666666653,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 289.61652063267957,
+      "start_time_s": 0.0,
+      "speed": 30.0,
+      "priority": 1.0,
+      "momentum": 30.0,
+      "margin": 12.0,
+      "steering_events": 3,
+      "state_changes_recorded": 1501
+    }
+  ],
+  "safety": {
+    "center_to_center": {
+      "violations": [],
+      "count": 0,
+      "minimum_distance_m": 24.199999999705273,
+      "rule": "distance < (margin_i + margin_j - 0.05)"
+    },
+    "obstacle_diagnostic": {
+      "violations": [],
+      "count": 0,
+      "minimum_clearance_m": null,
+      "rule": "distance_to_obstacle_center - (radius + vehicle_margin) < 0"
+    },
+    "goals": [
+      {
+        "vehicle": "CHAIN_0",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 3.3333333333333335,
+        "actual_time": 8.8,
+        "delay": 5.466666666666667
+      },
+      {
+        "vehicle": "CHAIN_1",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 3.3333333333333335,
+        "actual_time": 13.399999999999984,
+        "delay": 10.06666666666665
+      },
+      {
+        "vehicle": "CHAIN_2",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.08276253029821858,
+        "ideal_time": 3.3333333333333335,
+        "actual_time": 11.199999999999992,
+        "delay": 7.866666666666658
+      },
+      {
+        "vehicle": "CHAIN_3",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.08276253029821858,
+        "ideal_time": 3.3333333333333335,
+        "actual_time": 15.599999999999977,
+        "delay": 12.266666666666643
+      },
+      {
+        "vehicle": "CHAIN_4",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 3.3333333333333335,
+        "actual_time": 12.799999999999986,
+        "delay": 9.466666666666653
+      }
+    ]
+  },
+  "original_verify_manifest_output": "safety_report.txt",
+  "plot": {
+    "html": "10_chain.html",
+    "png": "10_chain.png"
+  }
+}

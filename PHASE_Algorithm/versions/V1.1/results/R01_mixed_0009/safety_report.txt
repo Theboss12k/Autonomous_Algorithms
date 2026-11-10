@@ -1,0 +1,25 @@
+
+================================================================================
+SIMULATION MANIFEST VERIFICATION (TIME/DELAY ANALYSIS)
+PBD Mode: GLOBAL (Entire Map)
+================================================================================
+✅ Veh R00        reached. [Ideal:  3.57s | Actual:  7.29s | Delay: + 3.72s]
+✅ Veh R01        reached. [Ideal:  7.18s | Actual:  9.80s | Delay: + 2.62s]
+✅ Veh R02        reached. [Ideal:  0.75s | Actual:  1.20s | Delay: + 0.45s]
+✅ Veh R03        reached. [Ideal:  4.34s | Actual:  7.40s | Delay: + 3.06s]
+✅ Veh R04        reached. [Ideal:  8.35s | Actual: 11.64s | Delay: + 3.29s]
+✅ Veh R05        reached. [Ideal:  5.19s | Actual:  8.80s | Delay: + 3.61s]
+✅ Veh R06        reached. [Ideal: 11.97s | Actual: 21.20s | Delay: + 9.23s]
+✅ Veh R07        reached. [Ideal:  0.92s | Actual:  1.00s | Delay: + 0.08s]
+✅ Veh R08        reached. [Ideal:  7.57s | Actual: 20.00s | Delay: +12.43s]
+✅ Veh R09        reached. [Ideal:  6.46s | Actual: 14.40s | Delay: + 7.94s]
+
+🟢 ALL drones successfully reached their destinations.
+--------------------------------------------------------------------------------
+COLLISION MARGIN CHECK (Center-to-Center)
+⚠️ VIOLATION at t=9.4s | Veh R00 & R09 | Dist: 12.37m (Allowed: 12.80m)
+⚠️ VIOLATION at t=9.6s | Veh R00 & R09 | Dist: 10.65m (Allowed: 12.80m)
+⚠️ VIOLATION at t=9.8s | Veh R00 & R09 | Dist: 10.82m (Allowed: 12.80m)
+🔴 WARNING: 3 mid-air margin violations detected.
+================================================================================
+

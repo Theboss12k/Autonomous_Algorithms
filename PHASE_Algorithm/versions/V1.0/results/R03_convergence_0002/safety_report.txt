@@ -1,0 +1,18 @@
+
+================================================================================
+SIMULATION MANIFEST VERIFICATION (TIME/DELAY ANALYSIS)
+PBD Mode: GLOBAL (Entire Map)
+================================================================================
+✅ Veh C00        reached. [Ideal:  6.49s | Actual:  9.20s | Delay: + 2.71s]
+✅ Veh C01        reached. [Ideal:  3.51s | Actual: 16.80s | Delay: +13.29s]
+✅ Veh C02        reached. [Ideal:  4.57s | Actual: 10.40s | Delay: + 5.83s]
+✅ Veh C03        reached. [Ideal:  6.17s | Actual: 13.40s | Delay: + 7.23s]
+✅ Veh C04        reached. [Ideal:  2.71s | Actual:  9.80s | Delay: + 7.09s]
+✅ Veh C05        reached. [Ideal:  2.72s | Actual: 15.40s | Delay: +12.68s]
+
+🟢 ALL drones successfully reached their destinations.
+--------------------------------------------------------------------------------
+COLLISION MARGIN CHECK (Center-to-Center)
+🟢 ZERO margin violations detected. Absolute safety maintained.
+================================================================================
+

@@ -1,0 +1,30 @@
+
+================================================================================
+SIMULATION MANIFEST VERIFICATION (TIME/DELAY ANALYSIS)
+PBD Mode: GLOBAL (Entire Map)
+================================================================================
+✅ Veh X00        reached. [Ideal:  7.44s | Actual: 13.40s | Delay: + 5.96s]
+✅ Veh X01        reached. [Ideal:  7.06s | Actual: 12.63s | Delay: + 5.58s]
+✅ Veh X02        reached. [Ideal: 15.73s | Actual: 20.48s | Delay: + 4.75s]
+✅ Veh X03        reached. [Ideal: 10.10s | Actual: 15.60s | Delay: + 5.50s]
+✅ Veh X04        reached. [Ideal:  9.45s | Actual: 16.80s | Delay: + 7.35s]
+✅ Veh X05        reached. [Ideal: 12.79s | Actual: 18.60s | Delay: + 5.81s]
+✅ Veh X06        reached. [Ideal: 18.54s | Actual: 26.60s | Delay: + 8.06s]
+✅ Veh X07        reached. [Ideal: 25.28s | Actual: 28.80s | Delay: + 3.52s]
+✅ Veh X08        reached. [Ideal: 12.66s | Actual: 17.00s | Delay: + 4.34s]
+
+🟢 ALL drones successfully reached their destinations.
+--------------------------------------------------------------------------------
+COLLISION MARGIN CHECK (Center-to-Center)
+⚠️ VIOLATION at t=14.6s | Veh X01 & X06 | Dist: 10.66m (Allowed: 11.37m)
+⚠️ VIOLATION at t=14.8s | Veh X01 & X06 | Dist: 9.23m (Allowed: 11.37m)
+⚠️ VIOLATION at t=15.0s | Veh X01 & X06 | Dist: 4.96m (Allowed: 11.37m)
+⚠️ VIOLATION at t=15.2s | Veh X01 & X06 | Dist: 3.11m (Allowed: 11.37m)
+⚠️ VIOLATION at t=15.8s | Veh X04 & X08 | Dist: 9.49m (Allowed: 12.35m)
+⚠️ VIOLATION at t=16.0s | Veh X04 & X08 | Dist: 7.12m (Allowed: 12.35m)
+⚠️ VIOLATION at t=16.2s | Veh X04 & X08 | Dist: 6.00m (Allowed: 12.35m)
+⚠️ VIOLATION at t=16.4s | Veh X04 & X08 | Dist: 3.00m (Allowed: 12.35m)
+⚠️ VIOLATION at t=16.6s | Veh X04 & X08 | Dist: 2.38m (Allowed: 12.35m)
+🔴 WARNING: 9 mid-air margin violations detected.
+================================================================================
+

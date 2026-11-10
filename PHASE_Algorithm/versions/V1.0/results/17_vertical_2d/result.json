@@ -1,0 +1,109 @@
+{
+  "summary": {
+    "case_name": "17_vertical_2d",
+    "category": "deterministic",
+    "seed": null,
+    "simulation_error": false,
+    "all_goals_reached": true,
+    "center_to_center_violations": 0,
+    "obstacle_penetration_violations": 0,
+    "current_safety_checks_pass": true,
+    "strict_diagnostic_pass": true,
+    "steering_events": 0,
+    "min_center_to_center_distance_m": 44.609416046390926,
+    "min_obstacle_clearance_m": null,
+    "average_delay_s": 2.6828028920760456,
+    "total_delay_sum_s": 5.365605784152091,
+    "vehicles_reached": 2,
+    "vehicle_count": 2,
+    "dt_s": 0.2,
+    "allow_3d": false
+  },
+  "goals": [
+    {
+      "vehicle": "CLIMB",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 8.117197107923948,
+      "actual_time": 10.799999999999994,
+      "delay": 2.6828028920760456
+    },
+    {
+      "vehicle": "DESCEND",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0827625302982193,
+      "ideal_time": 8.117197107923948,
+      "actual_time": 10.799999999999994,
+      "delay": 2.6828028920760456
+    }
+  ],
+  "vehicle_metrics": [
+    {
+      "vehicle": "CLIMB",
+      "ideal_time_s": 8.117197107923948,
+      "actual_time_s": 10.799999999999994,
+      "delay_s": 2.6828028920760456,
+      "original_path_length_m": 116.61903789690601,
+      "resolved_path_length_m": 124.64764225742766,
+      "start_time_s": 0.0,
+      "speed": 15.0,
+      "priority": 10.0,
+      "momentum": 150.0,
+      "margin": 4.0,
+      "steering_events": 0,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "DESCEND",
+      "ideal_time_s": 8.117197107923948,
+      "actual_time_s": 10.799999999999994,
+      "delay_s": 2.6828028920760456,
+      "original_path_length_m": 116.61903789690602,
+      "resolved_path_length_m": 124.08230901026599,
+      "start_time_s": 0.0,
+      "speed": 15.0,
+      "priority": 10.0,
+      "momentum": 150.0,
+      "margin": 4.0,
+      "steering_events": 0,
+      "state_changes_recorded": 1501
+    }
+  ],
+  "safety": {
+    "center_to_center": {
+      "violations": [],
+      "count": 0,
+      "minimum_distance_m": 44.609416046390926,
+      "rule": "distance < (margin_i + margin_j - 0.05)"
+    },
+    "obstacle_diagnostic": {
+      "violations": [],
+      "count": 0,
+      "minimum_clearance_m": null,
+      "rule": "distance_to_obstacle_center - (radius + vehicle_margin) < 0"
+    },
+    "goals": [
+      {
+        "vehicle": "CLIMB",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 8.117197107923948,
+        "actual_time": 10.799999999999994,
+        "delay": 2.6828028920760456
+      },
+      {
+        "vehicle": "DESCEND",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0827625302982193,
+        "ideal_time": 8.117197107923948,
+        "actual_time": 10.799999999999994,
+        "delay": 2.6828028920760456
+      }
+    ]
+  },
+  "original_verify_manifest_output": "safety_report.txt",
+  "plot": {
+    "html": "17_vertical_2d.html",
+    "png": "17_vertical_2d.png"
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "summary": {
+    "case_name": "05_four_way_cross",
+    "category": "deterministic",
+    "seed": null,
+    "simulation_error": false,
+    "all_goals_reached": true,
+    "center_to_center_violations": 0,
+    "obstacle_penetration_violations": 0,
+    "current_safety_checks_pass": true,
+    "strict_diagnostic_pass": true,
+    "steering_events": 5,
+    "min_center_to_center_distance_m": 8.199999999999989,
+    "min_obstacle_clearance_m": null,
+    "average_delay_s": 7.344444444444431,
+    "total_delay_sum_s": 29.377777777777723,
+    "vehicles_reached": 4,
+    "vehicle_count": 4,
+    "dt_s": 0.2,
+    "allow_3d": false
+  },
+  "goals": [
+    {
+      "vehicle": "NORTH",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 5.555555555555555,
+      "actual_time": 13.199999999999985,
+      "delay": 7.64444444444443
+    },
+    {
+      "vehicle": "SOUTH",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 5.555555555555555,
+      "actual_time": 13.599999999999984,
+      "delay": 8.044444444444428
+    },
+    {
+      "vehicle": "EAST",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 5.555555555555555,
+      "actual_time": 13.399999999999984,
+      "delay": 7.844444444444429
+    },
+    {
+      "vehicle": "WEST",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.41577310586390875,
+      "ideal_time": 5.555555555555555,
+      "actual_time": 11.399999999999991,
+      "delay": 5.844444444444436
+    }
+  ],
+  "vehicle_metrics": [
+    {
+      "vehicle": "NORTH",
+      "ideal_time_s": 5.555555555555555,
+      "actual_time_s": 13.199999999999985,
+      "delay_s": 7.64444444444443,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 189.1608839883604,
+      "start_time_s": 0.0,
+      "speed": 18.0,
+      "priority": 10.0,
+      "momentum": 180.0,
+      "margin": 4.0,
+      "steering_events": 2,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "SOUTH",
+      "ideal_time_s": 5.555555555555555,
+      "actual_time_s": 13.599999999999984,
+      "delay_s": 8.044444444444428,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 164.66005123133513,
+      "start_time_s": 0.0,
+      "speed": 18.0,
+      "priority": 10.0,
+      "momentum": 180.0,
+      "margin": 4.0,
+      "steering_events": 1,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "EAST",
+      "ideal_time_s": 5.555555555555555,
+      "actual_time_s": 13.399999999999984,
+      "delay_s": 7.844444444444429,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 163.53220742245372,
+      "start_time_s": 0.0,
+      "speed": 18.0,
+      "priority": 10.0,
+      "momentum": 180.0,
+      "margin": 4.0,
+      "steering_events": 1,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "WEST",
+      "ideal_time_s": 5.555555555555555,
+      "actual_time_s": 11.399999999999991,
+      "delay_s": 5.844444444444436,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 156.79871720358375,
+      "start_time_s": 0.0,
+      "speed": 18.0,
+      "priority": 10.0,
+      "momentum": 180.0,
+      "margin": 4.0,
+      "steering_events": 1,
+      "state_changes_recorded": 1501
+    }
+  ],
+  "safety": {
+    "center_to_center": {
+      "violations": [],
+      "count": 0,
+      "minimum_distance_m": 8.199999999999989,
+      "rule": "distance < (margin_i + margin_j - 0.05)"
+    },
+    "obstacle_diagnostic": {
+      "violations": [],
+      "count": 0,
+      "minimum_clearance_m": null,
+      "rule": "distance_to_obstacle_center - (radius + vehicle_margin) < 0"
+    },
+    "goals": [
+      {
+        "vehicle": "NORTH",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 5.555555555555555,
+        "actual_time": 13.199999999999985,
+        "delay": 7.64444444444443
+      },
+      {
+        "vehicle": "SOUTH",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 5.555555555555555,
+        "actual_time": 13.599999999999984,
+        "delay": 8.044444444444428
+      },
+      {
+        "vehicle": "EAST",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 5.555555555555555,
+        "actual_time": 13.399999999999984,
+        "delay": 7.844444444444429
+      },
+      {
+        "vehicle": "WEST",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.41577310586390875,
+        "ideal_time": 5.555555555555555,
+        "actual_time": 11.399999999999991,
+        "delay": 5.844444444444436
+      }
+    ]
+  },
+  "original_verify_manifest_output": "safety_report.txt",
+  "plot": {
+    "html": "05_four_way_cross.html",
+    "png": "05_four_way_cross.png"
+  }
+}

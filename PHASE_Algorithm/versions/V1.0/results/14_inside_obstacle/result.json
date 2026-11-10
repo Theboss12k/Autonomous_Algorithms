@@ -1,0 +1,78 @@
+{
+  "summary": {
+    "case_name": "14_inside_obstacle",
+    "category": "deterministic",
+    "seed": null,
+    "simulation_error": false,
+    "all_goals_reached": true,
+    "center_to_center_violations": 0,
+    "obstacle_penetration_violations": 0,
+    "current_safety_checks_pass": true,
+    "strict_diagnostic_pass": true,
+    "steering_events": 0,
+    "min_center_to_center_distance_m": null,
+    "min_obstacle_clearance_m": 0.5286750449474944,
+    "average_delay_s": 4.26666666666665,
+    "total_delay_sum_s": 4.26666666666665,
+    "vehicles_reached": 1,
+    "vehicle_count": 1,
+    "dt_s": 0.2,
+    "allow_3d": false
+  },
+  "goals": [
+    {
+      "vehicle": "INSIDE",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.08276253029824661,
+      "ideal_time": 9.333333333333334,
+      "actual_time": 13.599999999999984,
+      "delay": 4.26666666666665
+    }
+  ],
+  "vehicle_metrics": [
+    {
+      "vehicle": "INSIDE",
+      "ideal_time_s": 9.333333333333334,
+      "actual_time_s": 13.599999999999984,
+      "delay_s": 4.26666666666665,
+      "original_path_length_m": 140.0,
+      "resolved_path_length_m": 167.83966832314667,
+      "start_time_s": 0.0,
+      "speed": 15.0,
+      "priority": 1.0,
+      "momentum": 15.0,
+      "margin": 5.0,
+      "steering_events": 0,
+      "state_changes_recorded": 1501
+    }
+  ],
+  "safety": {
+    "center_to_center": {
+      "violations": [],
+      "count": 0,
+      "minimum_distance_m": null,
+      "rule": "distance < (margin_i + margin_j - 0.05)"
+    },
+    "obstacle_diagnostic": {
+      "violations": [],
+      "count": 0,
+      "minimum_clearance_m": 0.5286750449474944,
+      "rule": "distance_to_obstacle_center - (radius + vehicle_margin) < 0"
+    },
+    "goals": [
+      {
+        "vehicle": "INSIDE",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.08276253029824661,
+        "ideal_time": 9.333333333333334,
+        "actual_time": 13.599999999999984,
+        "delay": 4.26666666666665
+      }
+    ]
+  },
+  "original_verify_manifest_output": "safety_report.txt",
+  "plot": {
+    "html": "14_inside_obstacle.html",
+    "png": "14_inside_obstacle.png"
+  }
+}

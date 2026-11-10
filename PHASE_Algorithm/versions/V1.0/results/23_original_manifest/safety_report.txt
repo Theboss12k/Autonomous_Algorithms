@@ -1,0 +1,51 @@
+
+================================================================================
+SIMULATION MANIFEST VERIFICATION (TIME/DELAY ANALYSIS)
+PBD Mode: GLOBAL (Entire Map)
+================================================================================
+✅ Veh HEAD_A     reached. [Ideal:  4.00s | Actual: 14.20s | Delay: +10.20s]
+❌ Veh HEAD_B     FAILED to reach destination. Final Dist: 47.13m
+✅ Veh TANK       reached. [Ideal:  3.33s | Actual: 18.40s | Delay: +15.07s]
+✅ Veh FEATHER    reached. [Ideal: 20.00s | Actual: 63.20s | Delay: +43.20s]
+✅ Veh STACK_A    reached. [Ideal:  9.43s | Actual: 34.20s | Delay: +24.77s]
+✅ Veh STACK_B    reached. [Ideal:  6.67s | Actual: 34.20s | Delay: +27.53s]
+✅ Veh STACK_C    reached. [Ideal:  6.67s | Actual: 33.60s | Delay: +26.93s]
+✅ Veh STACK_D    reached. [Ideal:  7.90s | Actual: 22.20s | Delay: +14.30s]
+✅ Veh NORTH      reached. [Ideal:  5.56s | Actual: 38.80s | Delay: +33.24s]
+✅ Veh SOUTH      reached. [Ideal:  5.56s | Actual: 25.40s | Delay: +19.84s]
+✅ Veh EAST       reached. [Ideal:  5.56s | Actual: 28.00s | Delay: +22.44s]
+✅ Veh WEST       reached. [Ideal:  5.56s | Actual: 19.40s | Delay: +13.84s]
+✅ Veh DIAG_A     reached. [Ideal:  7.07s | Actual: 23.20s | Delay: +16.13s]
+✅ Veh DIAG_B     reached. [Ideal:  7.07s | Actual: 33.00s | Delay: +25.93s]
+✅ Veh CLIMB      reached. [Ideal:  8.12s | Actual: 22.80s | Delay: +14.68s]
+✅ Veh DESCEND    reached. [Ideal:  8.12s | Actual: 10.80s | Delay: + 2.68s]
+✅ Veh LOW_CRUISER reached. [Ideal:  4.55s | Actual:  6.80s | Delay: + 2.25s]
+✅ Veh HIGH_CRUISER reached. [Ideal:  4.55s | Actual: 16.80s | Delay: +12.25s]
+✅ Veh INJECT_A   reached. [Ideal:  3.57s | Actual: 11.40s | Delay: + 7.83s]
+✅ Veh INJECT_B   reached. [Ideal:  3.57s | Actual: 34.90s | Delay: +31.33s]
+✅ Veh LATE_CROSS reached. [Ideal:  4.00s | Actual: 36.20s | Delay: +32.20s]
+✅ Veh FAST_X     reached. [Ideal:  0.40s | Actual: 30.00s | Delay: +29.60s]
+❌ Veh FAST_Y     FAILED to reach destination. Final Dist: 10.20m
+✅ Veh SWAP_A     reached. [Ideal:  0.20s | Actual: 32.00s | Delay: +31.80s]
+✅ Veh SWAP_B     reached. [Ideal:  0.20s | Actual:  3.60s | Delay: + 3.40s]
+✅ Veh CHAIN_0    reached. [Ideal:  3.33s | Actual:  8.80s | Delay: + 5.47s]
+✅ Veh CHAIN_1    reached. [Ideal:  3.33s | Actual: 13.40s | Delay: +10.07s]
+✅ Veh CHAIN_2    reached. [Ideal:  3.33s | Actual: 11.20s | Delay: + 7.87s]
+✅ Veh CHAIN_3    reached. [Ideal:  3.33s | Actual: 15.60s | Delay: +12.27s]
+✅ Veh CHAIN_4    reached. [Ideal:  3.33s | Actual: 12.80s | Delay: + 9.47s]
+❌ Veh PBD_A      FAILED to reach destination. Final Dist: 41.44m
+✅ Veh PBD_B      reached. [Ideal: 10.00s | Actual: 118.20s | Delay: +108.20s]
+❌ Veh PBD_C      FAILED to reach destination. Final Dist: 24.94m
+✅ Veh ZERO_A     reached. [Ideal:  6.67s | Actual: 10.00s | Delay: + 3.33s]
+✅ Veh ZERO_B     reached. [Ideal:  6.67s | Actual: 10.60s | Delay: + 3.93s]
+✅ Veh INSIDE_OBS reached. [Ideal:  9.33s | Actual: 39.00s | Delay: +29.67s]
+❌ Veh BAD_GOAL   FAILED to reach destination. Final Dist: 5.20m
+✅ Veh GRAZER_A   reached. [Ideal:  5.00s | Actual: 38.20s | Delay: +33.20s]
+✅ Veh GRAZER_B   reached. [Ideal:  5.00s | Actual: 37.00s | Delay: +32.00s]
+✅ Veh MASSIVE    reached. [Ideal:  3.33s | Actual:  7.20s | Delay: + 3.87s]
+✅ Veh LIGHT      reached. [Ideal:  3.33s | Actual: 15.00s | Delay: +11.67s]
+--------------------------------------------------------------------------------
+COLLISION MARGIN CHECK (Center-to-Center)
+🟢 ZERO margin violations detected. Absolute safety maintained.
+================================================================================
+

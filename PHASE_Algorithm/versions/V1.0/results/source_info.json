@@ -1,0 +1,6 @@
+{
+  "phase_source": "versions/V1.0/phase_altitude_locked.py",
+  "sha256": "33856fed8ad7f0c9997de351355750b19bb5566a624816a6e8faad48607c33c8",
+  "python": "3.13.7 (main, Aug 14 2025, 11:12:11) [Clang 17.0.0 (clang-1700.0.13.3)]",
+  "numpy": "2.5.2"
+}

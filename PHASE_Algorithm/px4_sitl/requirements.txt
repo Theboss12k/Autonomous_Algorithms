@@ -1,4 +1,0 @@
-numpy
-plotly
-mavsdk==3.17.4
-pytest

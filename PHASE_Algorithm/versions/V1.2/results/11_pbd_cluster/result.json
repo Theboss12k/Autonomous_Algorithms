@@ -1,0 +1,140 @@
+{
+  "summary": {
+    "case_name": "11_pbd_cluster",
+    "category": "deterministic",
+    "seed": null,
+    "simulation_error": false,
+    "all_goals_reached": true,
+    "center_to_center_violations": 0,
+    "obstacle_penetration_violations": 0,
+    "current_safety_checks_pass": true,
+    "strict_diagnostic_pass": true,
+    "steering_events": 5,
+    "min_center_to_center_distance_m": 40.19999999999996,
+    "min_obstacle_clearance_m": null,
+    "average_delay_s": 6.599999999999974,
+    "total_delay_sum_s": 19.799999999999923,
+    "vehicles_reached": 3,
+    "vehicle_count": 3,
+    "dt_s": 0.2,
+    "allow_3d": false
+  },
+  "goals": [
+    {
+      "vehicle": "PBD_A",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 10.0,
+      "actual_time": 23.19999999999995,
+      "delay": 13.19999999999995
+    },
+    {
+      "vehicle": "PBD_B",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 10.0,
+      "actual_time": 7.800000000000004,
+      "delay": 0.0
+    },
+    {
+      "vehicle": "PBD_C",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.32455532033674866,
+      "ideal_time": 10.0,
+      "actual_time": 16.599999999999973,
+      "delay": 6.599999999999973
+    }
+  ],
+  "vehicle_metrics": [
+    {
+      "vehicle": "PBD_A",
+      "ideal_time_s": 10.0,
+      "actual_time_s": 23.19999999999995,
+      "delay_s": 13.19999999999995,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 234.26170463978949,
+      "start_time_s": 0.0,
+      "speed": 10.0,
+      "priority": 1.0,
+      "momentum": 10.0,
+      "margin": 20.0,
+      "steering_events": 2,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "PBD_B",
+      "ideal_time_s": 10.0,
+      "actual_time_s": 7.800000000000004,
+      "delay_s": 0.0,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 100.8503810797229,
+      "start_time_s": 0.0,
+      "speed": 10.0,
+      "priority": 1.0,
+      "momentum": 10.0,
+      "margin": 20.0,
+      "steering_events": 1,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "PBD_C",
+      "ideal_time_s": 10.0,
+      "actual_time_s": 16.599999999999973,
+      "delay_s": 6.599999999999973,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 148.4138844566991,
+      "start_time_s": 0.0,
+      "speed": 10.0,
+      "priority": 1.0,
+      "momentum": 10.0,
+      "margin": 20.0,
+      "steering_events": 2,
+      "state_changes_recorded": 1501
+    }
+  ],
+  "safety": {
+    "center_to_center": {
+      "violations": [],
+      "count": 0,
+      "minimum_distance_m": 40.19999999999996,
+      "rule": "distance < (margin_i + margin_j - 0.05)"
+    },
+    "obstacle_diagnostic": {
+      "violations": [],
+      "count": 0,
+      "minimum_clearance_m": null,
+      "rule": "distance_to_obstacle_center - (radius + vehicle_margin) < 0"
+    },
+    "goals": [
+      {
+        "vehicle": "PBD_A",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 10.0,
+        "actual_time": 23.19999999999995,
+        "delay": 13.19999999999995
+      },
+      {
+        "vehicle": "PBD_B",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 10.0,
+        "actual_time": 7.800000000000004,
+        "delay": 0.0
+      },
+      {
+        "vehicle": "PBD_C",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.32455532033674866,
+        "ideal_time": 10.0,
+        "actual_time": 16.599999999999973,
+        "delay": 6.599999999999973
+      }
+    ]
+  },
+  "original_verify_manifest_output": "safety_report.txt",
+  "plot": {
+    "html": "11_pbd_cluster.html",
+    "png": "11_pbd_cluster.png"
+  }
+}
