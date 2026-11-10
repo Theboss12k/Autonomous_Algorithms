@@ -1,0 +1,6 @@
+# Kinematic PHASE versions, PHASE-D and the test suite
+numpy
+plotly
+pytest
+# Only needed to fly PX4 (px4_sitl/). Pinned: MAVSDK 4.x has a different API.
+mavsdk==3.17.4

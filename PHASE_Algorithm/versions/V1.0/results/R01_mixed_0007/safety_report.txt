@@ -1,0 +1,13 @@
+
+================================================================================
+SIMULATION MANIFEST VERIFICATION (TIME/DELAY ANALYSIS)
+PBD Mode: GLOBAL (Entire Map)
+================================================================================
+✅ Veh R00        reached. [Ideal:  6.10s | Actual: 12.20s | Delay: + 6.10s]
+✅ Veh R01        reached. [Ideal:  5.41s | Actual:  7.00s | Delay: + 1.59s]
+❌ Veh R02        FAILED to reach destination. Final Dist: 0.72m
+--------------------------------------------------------------------------------
+COLLISION MARGIN CHECK (Center-to-Center)
+🟢 ZERO margin violations detected. Absolute safety maintained.
+================================================================================
+

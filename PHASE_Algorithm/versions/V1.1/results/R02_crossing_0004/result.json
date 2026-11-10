@@ -1,0 +1,233 @@
+{
+  "summary": {
+    "case_name": "R02_crossing_0004",
+    "category": "random_crossing",
+    "seed": 110004,
+    "simulation_error": false,
+    "all_goals_reached": true,
+    "center_to_center_violations": 0,
+    "obstacle_penetration_violations": 0,
+    "current_safety_checks_pass": true,
+    "strict_diagnostic_pass": true,
+    "steering_events": 8,
+    "min_center_to_center_distance_m": 13.730128915850559,
+    "min_obstacle_clearance_m": null,
+    "average_delay_s": 4.865479429081594,
+    "total_delay_sum_s": 29.192876574489564,
+    "vehicles_reached": 6,
+    "vehicle_count": 6,
+    "dt_s": 0.2,
+    "allow_3d": false
+  },
+  "goals": [
+    {
+      "vehicle": "X00",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 8.309317141719838,
+      "actual_time": 13.199999999999985,
+      "delay": 4.890682858280147
+    },
+    {
+      "vehicle": "X01",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 12.212512873363863,
+      "actual_time": 14.114577898921286,
+      "delay": 1.9020650255574232
+    },
+    {
+      "vehicle": "X02",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 15.286546361115407,
+      "actual_time": 22.43826797619237,
+      "delay": 7.151721615076964
+    },
+    {
+      "vehicle": "X03",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 6.846853876385693,
+      "actual_time": 13.999999999999982,
+      "delay": 7.153146123614289
+    },
+    {
+      "vehicle": "X04",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 15.353092312421937,
+      "actual_time": 20.799999999999958,
+      "delay": 5.446907687578021
+    },
+    {
+      "vehicle": "X05",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 10.44764808330813,
+      "actual_time": 13.096001347690846,
+      "delay": 2.648353264382717
+    }
+  ],
+  "vehicle_metrics": [
+    {
+      "vehicle": "X00",
+      "ideal_time_s": 8.309317141719838,
+      "actual_time_s": 13.199999999999985,
+      "delay_s": 4.890682858280147,
+      "original_path_length_m": 200.5376701981791,
+      "resolved_path_length_m": 205.6156859087103,
+      "start_time_s": 0.0,
+      "speed": 24.13407344766148,
+      "priority": 2.6097528691344536,
+      "momentum": 62.98396742393618,
+      "margin": 7.290780966837238,
+      "steering_events": 0,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "X01",
+      "ideal_time_s": 12.212512873363863,
+      "actual_time_s": 14.114577898921286,
+      "delay_s": 1.9020650255574232,
+      "original_path_length_m": 200.42569577237268,
+      "resolved_path_length_m": 204.46609000592358,
+      "start_time_s": 4.685422101078679,
+      "speed": 16.411503336836738,
+      "priority": 3.653092333127416,
+      "momentum": 59.95273701489329,
+      "margin": 5.539395001704957,
+      "steering_events": 0,
+      "state_changes_recorded": 1478
+    },
+    {
+      "vehicle": "X02",
+      "ideal_time_s": 15.286546361115407,
+      "actual_time_s": 22.43826797619237,
+      "delay_s": 7.151721615076964,
+      "original_path_length_m": 200.88586473232357,
+      "resolved_path_length_m": 234.3078214716601,
+      "start_time_s": 5.7617320238075616,
+      "speed": 13.141350569761107,
+      "priority": 3.719487666844922,
+      "momentum": 48.879091369911926,
+      "margin": 5.571450550138814,
+      "steering_events": 2,
+      "state_changes_recorded": 1473
+    },
+    {
+      "vehicle": "X03",
+      "ideal_time_s": 6.846853876385693,
+      "actual_time_s": 13.999999999999982,
+      "delay_s": 7.153146123614289,
+      "original_path_length_m": 200.40337199379053,
+      "resolved_path_length_m": 230.35612377041417,
+      "start_time_s": 0.0,
+      "speed": 29.269409806592684,
+      "priority": 3.813194070864391,
+      "momentum": 111.60993993219928,
+      "margin": 5.42059329055798,
+      "steering_events": 4,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "X04",
+      "ideal_time_s": 15.353092312421937,
+      "actual_time_s": 20.799999999999958,
+      "delay_s": 5.446907687578021,
+      "original_path_length_m": 203.76654557607048,
+      "resolved_path_length_m": 220.13009659251918,
+      "start_time_s": 0.0,
+      "speed": 13.272019826989926,
+      "priority": 31.54254894790419,
+      "momentum": 418.6333350303846,
+      "margin": 7.282124172773212,
+      "steering_events": 2,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "X05",
+      "ideal_time_s": 10.44764808330813,
+      "actual_time_s": 13.096001347690846,
+      "delay_s": 2.648353264382717,
+      "original_path_length_m": 200.3001102851924,
+      "resolved_path_length_m": 203.62063524151029,
+      "start_time_s": 6.103998652309118,
+      "speed": 19.171789544213826,
+      "priority": 3.2028310015871,
+      "momentum": 61.40400190811146,
+      "margin": 3.9141568703104985,
+      "steering_events": 0,
+      "state_changes_recorded": 1471
+    }
+  ],
+  "safety": {
+    "center_to_center": {
+      "violations": [],
+      "count": 0,
+      "minimum_distance_m": 13.730128915850559,
+      "rule": "distance < (margin_i + margin_j - 0.05)"
+    },
+    "obstacle_diagnostic": {
+      "violations": [],
+      "count": 0,
+      "minimum_clearance_m": null,
+      "rule": "distance_to_obstacle_center - (radius + vehicle_margin) < 0"
+    },
+    "goals": [
+      {
+        "vehicle": "X00",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 8.309317141719838,
+        "actual_time": 13.199999999999985,
+        "delay": 4.890682858280147
+      },
+      {
+        "vehicle": "X01",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 12.212512873363863,
+        "actual_time": 14.114577898921286,
+        "delay": 1.9020650255574232
+      },
+      {
+        "vehicle": "X02",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 15.286546361115407,
+        "actual_time": 22.43826797619237,
+        "delay": 7.151721615076964
+      },
+      {
+        "vehicle": "X03",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 6.846853876385693,
+        "actual_time": 13.999999999999982,
+        "delay": 7.153146123614289
+      },
+      {
+        "vehicle": "X04",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 15.353092312421937,
+        "actual_time": 20.799999999999958,
+        "delay": 5.446907687578021
+      },
+      {
+        "vehicle": "X05",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 10.44764808330813,
+        "actual_time": 13.096001347690846,
+        "delay": 2.648353264382717
+      }
+    ]
+  },
+  "original_verify_manifest_output": "safety_report.txt",
+  "plot": {
+    "html": "R02_crossing_0004.html",
+    "png": "R02_crossing_0004.png"
+  }
+}

@@ -1,0 +1,686 @@
+{
+  "summary": {
+    "case_name": "16_grazing",
+    "category": "deterministic",
+    "seed": null,
+    "simulation_error": false,
+    "all_goals_reached": true,
+    "center_to_center_violations": 32,
+    "obstacle_penetration_violations": 0,
+    "current_safety_checks_pass": false,
+    "strict_diagnostic_pass": false,
+    "steering_events": 2,
+    "min_center_to_center_distance_m": 2.0533358168992777,
+    "min_obstacle_clearance_m": null,
+    "average_delay_s": 1.8000000000000034,
+    "total_delay_sum_s": 3.6000000000000068,
+    "vehicles_reached": 2,
+    "vehicle_count": 2,
+    "dt_s": 0.2,
+    "allow_3d": false
+  },
+  "goals": [
+    {
+      "vehicle": "A",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 5.0,
+      "actual_time": 6.800000000000003,
+      "delay": 1.8000000000000034
+    },
+    {
+      "vehicle": "B",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 5.0,
+      "actual_time": 6.800000000000003,
+      "delay": 1.8000000000000034
+    }
+  ],
+  "vehicle_metrics": [
+    {
+      "vehicle": "A",
+      "ideal_time_s": 5.0,
+      "actual_time_s": 6.800000000000003,
+      "delay_s": 1.8000000000000034,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 107.29444842463303,
+      "start_time_s": 0.0,
+      "speed": 20.0,
+      "priority": 1.0,
+      "momentum": 20.0,
+      "margin": 5.0,
+      "steering_events": 1,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "B",
+      "ideal_time_s": 5.0,
+      "actual_time_s": 6.800000000000003,
+      "delay_s": 1.8000000000000034,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 105.89663096604733,
+      "start_time_s": 0.0,
+      "speed": 20.0,
+      "priority": 1.0,
+      "momentum": 20.0,
+      "margin": 5.0,
+      "steering_events": 1,
+      "state_changes_recorded": 1501
+    }
+  ],
+  "safety": {
+    "center_to_center": {
+      "violations": [
+        {
+          "time": 0.4,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.046706857032294,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            2.6207770399449224,
+            77.96124483661372,
+            10.0
+          ],
+          "position_b": [
+            3.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 0.6,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            6.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            6.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 0.8,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            9.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            9.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 1.0,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            12.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            12.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 1.2,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            15.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            15.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 1.4,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            18.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            18.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 1.6,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            21.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            21.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 1.8,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            24.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            24.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 2.0,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            27.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            27.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 2.2,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            30.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            30.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 2.4,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            33.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            33.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 2.6,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            36.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            36.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 2.8,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            39.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            39.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 3.0,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            42.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            42.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 3.2,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            45.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            45.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 3.4,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            48.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            48.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 3.6,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            51.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            51.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 3.8,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            54.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            54.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 4.0,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            57.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            57.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 4.2,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            60.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            60.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 4.4,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            63.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            63.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 4.6,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            66.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            66.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 4.8,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            69.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            69.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 5.0,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            72.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            72.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 5.2,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            75.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            75.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 5.4,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            78.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            78.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 5.6,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            81.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            81.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 5.8,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            84.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            84.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 6.0,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            87.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            87.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 6.2,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            90.0,
+            78.0,
+            10.0
+          ],
+          "position_b": [
+            90.0,
+            87.0,
+            10.0
+          ]
+        },
+        {
+          "time": 6.4,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 3.343145750507631,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            92.82842712474618,
+            80.82842712474618,
+            10.0
+          ],
+          "position_b": [
+            92.82842712474618,
+            84.17157287525382,
+            10.0
+          ]
+        },
+        {
+          "time": 6.6,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 2.0533358168992777,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            96.77609701770726,
+            81.47333209155036,
+            10.0
+          ],
+          "position_b": [
+            96.77609701770726,
+            83.52666790844964,
+            10.0
+          ]
+        }
+      ],
+      "count": 32,
+      "minimum_distance_m": 2.0533358168992777,
+      "rule": "distance < (margin_i + margin_j - 0.05)"
+    },
+    "obstacle_diagnostic": {
+      "violations": [],
+      "count": 0,
+      "minimum_clearance_m": null,
+      "rule": "distance_to_obstacle_center - (radius + vehicle_margin) < 0"
+    },
+    "goals": [
+      {
+        "vehicle": "A",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 5.0,
+        "actual_time": 6.800000000000003,
+        "delay": 1.8000000000000034
+      },
+      {
+        "vehicle": "B",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 5.0,
+        "actual_time": 6.800000000000003,
+        "delay": 1.8000000000000034
+      }
+    ]
+  },
+  "original_verify_manifest_output": "safety_report.txt",
+  "plot": {
+    "html": "16_grazing.html",
+    "png": "16_grazing.png"
+  }
+}

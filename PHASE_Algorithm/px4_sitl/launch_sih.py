@@ -15,7 +15,8 @@ import time
 from pathlib import Path
 
 import geo
-import scenarios
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # PHASE_Algorithm/, home of phase_d
+from phase_d import scenarios
 
 PX4_DIR = Path(os.environ.get("PX4_DIR", "~/PX4-Autopilot")).expanduser()
 BUILD = PX4_DIR / "build/px4_sitl_default"

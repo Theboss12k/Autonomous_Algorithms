@@ -453,7 +453,7 @@ footer ul { padding-left: 18px; }
         <div class="card reveal">
           <div class="meta"><span class="tag ver">V1.0</span><span class="tag">13 Sep 2026</span><span class="tag good">safe</span><span class="tag warn">deadlocks</span></div>
           <h3>A test suite puts it under pressure</h3>
-          <p>An autonomous test harness ran V1.0 on 173 cases: 23 hand-built adversarial scenarios plus 150 seeded random ones (mixed traffic, crossings, convergence).
+          <p>An autonomous test harness ran V1.0 on 53 cases: 23 hand-built adversarial scenarios plus 30 seeded random ones (mixed traffic, crossings, convergence).
             Vehicles never got closer than allowed. The failures were vehicles that never arrived: symmetric encounters left them stuck facing each other.</p>
           <div class="pipe">
             <span class="step">Intent<small>local A*</small></span><span class="arrow">→</span>
@@ -464,9 +464,9 @@ footer ul { padding-left: 18px; }
           </div>
           <div class="tiles">
             <div class="tile good"><b>18 / 22</b><span>shared deterministic cases passed</span></div>
-            <div class="tile good"><b>0</b><span>separation-violation ticks, all 173 cases</span></div>
+            <div class="tile good"><b>0</b><span>separation-violation ticks, all 53 cases</span></div>
             <div class="tile"><b>7.3 s</b><span>mean delay per vehicle (shared cases)</span></div>
-            <div class="tile warn"><b>152 / 173</b><span>all cases passed</span></div>
+            <div class="tile warn"><b>45 / 53</b><span>all cases passed</span></div>
           </div>
           <button class="tech-btn" aria-expanded="false">Technical details <span class="chev">▾</span></button>
           <div class="tech"><div><div class="tech-body">
@@ -474,7 +474,7 @@ footer ul { padding-left: 18px; }
             <ul>
               <li>Conflict fires when bubbles overlap and at least one of the pair is <code>NORMAL</code>; both get a <code>DEFLECTING</code> target and follow it until reached, then replan with A*.</li>
               <li>Global micro-PBD (“concrete-bounce fixed”): 50 iterations every tick, obstacles first, then vehicle pairs, momentum-weighted.</li>
-              <li>1,353 lines in <code>PHASE_V1.0/Testing/phase_altitude_locked.py</code> (altitude-locked 2D variant).</li>
+              <li>1,353 lines in <code>versions/V1.0/phase_altitude_locked.py</code> (altitude-locked 2D variant).</li>
             </ul>
             <h4>Failing cases</h4>
             <div class="tbl-scroll"><table>
@@ -486,8 +486,8 @@ footer ul { padding-left: 18px; }
               <tr><td>23_original_manifest</td><td>36 / 41</td><td>5 stuck; 1 obstacle-penetration tick</td></tr>
             </table></div>
             <h4>Random cases</h4>
-            <p>150 cases: 134 passed, 0 separation-violation ticks, 22 obstacle-penetration ticks.
-              Source: <code>PHASE_V1.0/Testing/phase_test_results/</code>.</p>
+            <p>30 cases: 27 passed, 0 separation-violation ticks, 6 obstacle-penetration ticks.
+              Source: <a href="versions/V1.0/results/">versions/V1.0/results/</a>.</p>
           </div></div></div>
         </div>
       </article>
@@ -577,7 +577,7 @@ footer ul { padding-left: 18px; }
             <p><code>03_equal_head_on</code>, <code>04_three_way_cross</code>, <code>06_diagonal_cross</code> and <code>16_grazing</code>: all safe, but not every vehicle arrives.
               Deadlocks are now <em>identified</em>, not yet resolved.</p>
             <h4>Scope of the evidence</h4>
-            <p>The V1.2 suite was run on the deterministic cases only (22), no random cases. Source: <code>PHASE_V1.2/Testing/phase_test_results/</code>. The same file is the version flown on PX4 next.</p>
+            <p>The V1.2 suite was run on the deterministic cases only (22), no random cases. Source: <a href="versions/V1.2/results/">versions/V1.2/results/</a>. The same file is the version flown on PX4 next.</p>
           </div></div></div>
         </div>
       </article>
@@ -604,7 +604,7 @@ footer ul { padding-left: 18px; }
           </div>
           <button class="tech-btn" aria-expanded="false">Technical details <span class="chev">▾</span></button>
           <div class="tech"><div><div class="tech-body">
-            <h4>Harness (<code>px4_sitl/</code>)</h4>
+            <h4>Harness (<code>px4_sitl/</code> and <code>phase_d/</code>)</h4>
             <ul>
               <li><code>phase_stepper.py</code> loads V1.2 unmodified and runs its loop one tick at a time. <code>test_stepper_equivalence.py</code> proves it reproduces <code>Simulation.run()</code> exactly.</li>
               <li><code>launch_sih.py</code> starts one SIH instance per drone (airframe 10040, <code>-i N</code>, spawn via <code>PX4_HOME_LAT/LON</code>).</li>
@@ -617,7 +617,7 @@ footer ul { padding-left: 18px; }
               <li><b>F-02</b>: kinematic livelock in the symmetric three-way swap.</li>
               <li><b>F-03</b>: a deflection lasts one tick, because the replan on the same tick resets it.</li>
             </ul>
-            <p>Full log: <a href="px4_sitl/CHANGELOG.md">px4_sitl/CHANGELOG.md</a> (entries H-01…H-11, F-01…F-03).</p>
+            <p>Full log: <a href="CHANGELOG.md">CHANGELOG.md</a> (entries H-01…H-11, F-01…F-03).</p>
           </div></div></div>
         </div>
       </article>
@@ -683,7 +683,7 @@ Priority braking  excess = c_cmd − c_safe(g_eff)
               <li><b>D-08</b>: spatial hash grid for every neighbour query. <b>D-09</b>: replan only near the conflict.</li>
               <li><b>D-11</b>: a waypoint counts as reached once passed, which stops acceleration-limited vehicles circling it. <b>H-11</b>: MAVSDK connect went from ~60 s to ~1 s.</li>
             </ul>
-            <p>Design document: <a href="px4_sitl/PHASE_D.md">px4_sitl/PHASE_D.md</a> · code: <code>px4_sitl/phase_dynamic.py</code>, <code>spatial_grid.py</code> · 48 tests.</p>
+            <p>Design document: <a href="phase_d/PHASE_D.md">phase_d/PHASE_D.md</a> · code: <a href="phase_d/">phase_d/</a> (<code>phase_dynamic.py</code>, <code>spatial_grid.py</code>) · 48 tests.</p>
           </div></div></div>
         </div>
       </article>
@@ -788,11 +788,11 @@ Priority braking  excess = c_cmd − c_safe(g_eff)
   <div class="wrap">
     <p><b>Sources</b> (paths relative to <code>PHASE_Algorithm/</code>):</p>
     <ul>
-      <li>Suite results: <code>PHASE_V1.0/Testing/phase_test_results/</code>, <code>PHASE_V1.1/…</code>, <code>PHASE_V1.2/…</code> (<code>result.json</code> per case)</li>
-      <li>PX4 harness, change log and design: <a href="px4_sitl/README.md">px4_sitl/README.md</a>, <a href="px4_sitl/CHANGELOG.md">CHANGELOG.md</a>, <a href="px4_sitl/PHASE_D.md">PHASE_D.md</a></li>
+      <li>Versions and suite results: <a href="versions/README.md">versions/</a> (<code>results/&lt;case&gt;/result.json</code> per case, provenance in <code>versions/README.md</code>)</li>
+      <li>PX4 harness, change log and PHASE-D design: <a href="px4_sitl/README.md">px4_sitl/README.md</a>, <a href="CHANGELOG.md">CHANGELOG.md</a>, <a href="phase_d/PHASE_D.md">phase_d/PHASE_D.md</a></li>
       <li>Algorithm overview: <a href="Algorithm_Overview.md">Algorithm_Overview.md</a></li>
     </ul>
-    <p>Last updated 10 Nov 2026.</p>
+    <p>Last updated 11 Nov 2026.</p>
   </div>
 </footer>
 

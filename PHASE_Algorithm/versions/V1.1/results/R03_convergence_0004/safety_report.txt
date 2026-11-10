@@ -1,0 +1,33 @@
+
+================================================================================
+SIMULATION MANIFEST VERIFICATION (TIME/DELAY ANALYSIS)
+PBD Mode: GLOBAL (Entire Map)
+================================================================================
+✅ Veh C00        reached. [Ideal:  3.16s | Actual:  6.00s | Delay: + 2.84s]
+✅ Veh C01        reached. [Ideal:  6.34s | Actual:  9.77s | Delay: + 3.43s]
+✅ Veh C02        reached. [Ideal:  2.26s | Actual:  4.20s | Delay: + 1.94s]
+✅ Veh C03        reached. [Ideal:  3.86s | Actual:  5.60s | Delay: + 1.74s]
+✅ Veh C04        reached. [Ideal:  2.79s | Actual:  3.60s | Delay: + 0.81s]
+✅ Veh C05        reached. [Ideal:  5.27s | Actual:  8.80s | Delay: + 3.53s]
+✅ Veh C06        reached. [Ideal:  6.10s | Actual:  9.60s | Delay: + 3.50s]
+✅ Veh C07        reached. [Ideal:  6.23s | Actual:  9.91s | Delay: + 3.69s]
+✅ Veh C08        reached. [Ideal:  9.08s | Actual: 12.80s | Delay: + 3.72s]
+✅ Veh C09        reached. [Ideal:  5.52s | Actual:  9.00s | Delay: + 3.48s]
+
+🟢 ALL drones successfully reached their destinations.
+--------------------------------------------------------------------------------
+COLLISION MARGIN CHECK (Center-to-Center)
+⚠️ VIOLATION at t=5.4s | Veh C00 & C03 | Dist: 10.51m (Allowed: 11.89m)
+⚠️ VIOLATION at t=5.4s | Veh C05 & C06 | Dist: 7.52m (Allowed: 9.10m)
+⚠️ VIOLATION at t=5.6s | Veh C05 & C06 | Dist: 6.62m (Allowed: 9.10m)
+⚠️ VIOLATION at t=5.8s | Veh C05 & C06 | Dist: 5.17m (Allowed: 9.10m)
+⚠️ VIOLATION at t=6.0s | Veh C05 & C06 | Dist: 3.01m (Allowed: 9.10m)
+⚠️ VIOLATION at t=6.2s | Veh C05 & C06 | Dist: 2.79m (Allowed: 9.10m)
+⚠️ VIOLATION at t=8.2s | Veh C01 & C09 | Dist: 10.36m (Allowed: 10.86m)
+⚠️ VIOLATION at t=8.6s | Veh C01 & C05 | Dist: 9.02m (Allowed: 10.36m)
+⚠️ VIOLATION at t=8.6s | Veh C01 & C09 | Dist: 8.95m (Allowed: 10.86m)
+⚠️ VIOLATION at t=8.6s | Veh C05 & C09 | Dist: 9.49m (Allowed: 10.00m)
+⚠️ VIOLATION at t=9.4s | Veh C01 & C06 | Dist: 9.82m (Allowed: 9.96m)
+🔴 WARNING: 11 mid-air margin violations detected.
+================================================================================
+

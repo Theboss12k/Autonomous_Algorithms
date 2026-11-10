@@ -1,0 +1,236 @@
+{
+  "summary": {
+    "case_name": "03_equal_head_on",
+    "category": "deterministic",
+    "seed": null,
+    "simulation_error": false,
+    "all_goals_reached": true,
+    "center_to_center_violations": 7,
+    "obstacle_penetration_violations": 0,
+    "current_safety_checks_pass": false,
+    "strict_diagnostic_pass": false,
+    "steering_events": 2,
+    "min_center_to_center_distance_m": 0.0,
+    "min_obstacle_clearance_m": null,
+    "average_delay_s": 1.7333333333333352,
+    "total_delay_sum_s": 3.4666666666666703,
+    "vehicles_reached": 2,
+    "vehicle_count": 2,
+    "dt_s": 0.2,
+    "allow_3d": false
+  },
+  "goals": [
+    {
+      "vehicle": "A",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 6.666666666666667,
+      "actual_time": 8.400000000000002,
+      "delay": 1.7333333333333352
+    },
+    {
+      "vehicle": "B",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.08276253029822003,
+      "ideal_time": 6.666666666666667,
+      "actual_time": 8.400000000000002,
+      "delay": 1.7333333333333352
+    }
+  ],
+  "vehicle_metrics": [
+    {
+      "vehicle": "A",
+      "ideal_time_s": 6.666666666666667,
+      "actual_time_s": 8.400000000000002,
+      "delay_s": 1.7333333333333352,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 113.52985897465699,
+      "start_time_s": 0.0,
+      "speed": 15.0,
+      "priority": 10.0,
+      "momentum": 150.0,
+      "margin": 5.0,
+      "steering_events": 1,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "B",
+      "ideal_time_s": 6.666666666666667,
+      "actual_time_s": 8.400000000000002,
+      "delay_s": 1.7333333333333352,
+      "original_path_length_m": 100.0,
+      "resolved_path_length_m": 113.57894974833337,
+      "start_time_s": 0.0,
+      "speed": 15.0,
+      "priority": 10.0,
+      "momentum": 150.0,
+      "margin": 5.0,
+      "steering_events": 1,
+      "state_changes_recorded": 1501
+    }
+  ],
+  "safety": {
+    "center_to_center": {
+      "violations": [
+        {
+          "time": 3.4,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 9.917533446174584,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            44.999796122155615,
+            50.99603731037199,
+            10.0
+          ],
+          "position_b": [
+            54.878679656440355,
+            50.121320343559645,
+            10.0
+          ]
+        },
+        {
+          "time": 3.6,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 7.199037709478383,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            47.11978803184571,
+            53.11868525641687,
+            10.0
+          ],
+          "position_b": [
+            54.0,
+            51.0,
+            10.0
+          ]
+        },
+        {
+          "time": 3.8,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 6.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            48.0,
+            54.0,
+            10.0
+          ],
+          "position_b": [
+            54.0,
+            54.0,
+            10.0
+          ]
+        },
+        {
+          "time": 4.0,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 1.757359312880709,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            50.121320343559645,
+            56.121320343559645,
+            10.0
+          ],
+          "position_b": [
+            51.878679656440355,
+            56.121320343559645,
+            10.0
+          ]
+        },
+        {
+          "time": 4.2,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 0.0,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            51.0,
+            57.0,
+            10.0
+          ],
+          "position_b": [
+            51.0,
+            57.0,
+            10.0
+          ]
+        },
+        {
+          "time": 4.4,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 5.543277195067724,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            53.121320343559645,
+            59.121320343559645,
+            10.0
+          ],
+          "position_b": [
+            48.0,
+            57.0,
+            10.0
+          ]
+        },
+        {
+          "time": 4.6,
+          "vehicle_a": "A",
+          "vehicle_b": "B",
+          "distance": 8.168716059538237,
+          "allowed": 10.0,
+          "threshold_used_by_current_check": 9.95,
+          "position_a": [
+            54.0,
+            60.0,
+            10.0
+          ],
+          "position_b": [
+            45.878679656440355,
+            59.121320343559645,
+            10.0
+          ]
+        }
+      ],
+      "count": 7,
+      "minimum_distance_m": 0.0,
+      "rule": "distance < (margin_i + margin_j - 0.05)"
+    },
+    "obstacle_diagnostic": {
+      "violations": [],
+      "count": 0,
+      "minimum_clearance_m": null,
+      "rule": "distance_to_obstacle_center - (radius + vehicle_margin) < 0"
+    },
+    "goals": [
+      {
+        "vehicle": "A",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 6.666666666666667,
+        "actual_time": 8.400000000000002,
+        "delay": 1.7333333333333352
+      },
+      {
+        "vehicle": "B",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.08276253029822003,
+        "ideal_time": 6.666666666666667,
+        "actual_time": 8.400000000000002,
+        "delay": 1.7333333333333352
+      }
+    ]
+  },
+  "original_verify_manifest_output": "safety_report.txt",
+  "plot": {
+    "html": "03_equal_head_on.html",
+    "png": "03_equal_head_on.png"
+  }
+}

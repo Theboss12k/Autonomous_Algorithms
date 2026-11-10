@@ -1,0 +1,140 @@
+{
+  "summary": {
+    "case_name": "R01_mixed_0000",
+    "category": "random_mixed",
+    "seed": 100000,
+    "simulation_error": false,
+    "all_goals_reached": true,
+    "center_to_center_violations": 0,
+    "obstacle_penetration_violations": 0,
+    "current_safety_checks_pass": true,
+    "strict_diagnostic_pass": true,
+    "steering_events": 0,
+    "min_center_to_center_distance_m": 34.10372550580202,
+    "min_obstacle_clearance_m": 1.2345689504207407,
+    "average_delay_s": 3.0469098299960202,
+    "total_delay_sum_s": 9.140729489988061,
+    "vehicles_reached": 3,
+    "vehicle_count": 3,
+    "dt_s": 0.2,
+    "allow_3d": false
+  },
+  "goals": [
+    {
+      "vehicle": "R00",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 6.656342546280505,
+      "actual_time": 9.599999999999998,
+      "delay": 2.943657453719493
+    },
+    {
+      "vehicle": "R01",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 1.33097637274305,
+      "actual_time": 1.9999999999999998,
+      "delay": 0.6690236272569499
+    },
+    {
+      "vehicle": "R02",
+      "reached_goal": true,
+      "final_distance_to_goal": 0.0,
+      "ideal_time": 20.271951590988323,
+      "actual_time": 25.79999999999994,
+      "delay": 5.5280484090116175
+    }
+  ],
+  "vehicle_metrics": [
+    {
+      "vehicle": "R00",
+      "ideal_time_s": 6.656342546280505,
+      "actual_time_s": 9.599999999999998,
+      "delay_s": 2.943657453719493,
+      "original_path_length_m": 142.6788989113125,
+      "resolved_path_length_m": 148.11263787638,
+      "start_time_s": 0.0,
+      "speed": 21.435029510468926,
+      "priority": 87.29932159797163,
+      "momentum": 1871.2635346964391,
+      "margin": 8.007123303546102,
+      "steering_events": 0,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "R01",
+      "ideal_time_s": 1.33097637274305,
+      "actual_time_s": 1.9999999999999998,
+      "delay_s": 0.6690236272569499,
+      "original_path_length_m": 28.814902500127832,
+      "resolved_path_length_m": 30.423260126474627,
+      "start_time_s": 0.0,
+      "speed": 21.64944704521112,
+      "priority": 40.161104080880314,
+      "momentum": 869.4656960762305,
+      "margin": 7.169453700793768,
+      "steering_events": 0,
+      "state_changes_recorded": 1501
+    },
+    {
+      "vehicle": "R02",
+      "ideal_time_s": 20.271951590988323,
+      "actual_time_s": 25.79999999999994,
+      "delay_s": 5.5280484090116175,
+      "original_path_length_m": 174.27200669382287,
+      "resolved_path_length_m": 188.43473046579155,
+      "start_time_s": 0.0,
+      "speed": 8.596705941784785,
+      "priority": 0.19121930649450194,
+      "momentum": 1.643856148325251,
+      "margin": 9.10721920097894,
+      "steering_events": 0,
+      "state_changes_recorded": 1501
+    }
+  ],
+  "safety": {
+    "center_to_center": {
+      "violations": [],
+      "count": 0,
+      "minimum_distance_m": 34.10372550580202,
+      "rule": "distance < (margin_i + margin_j - 0.05)"
+    },
+    "obstacle_diagnostic": {
+      "violations": [],
+      "count": 0,
+      "minimum_clearance_m": 1.2345689504207407,
+      "rule": "distance_to_obstacle_center - (radius + vehicle_margin) < 0"
+    },
+    "goals": [
+      {
+        "vehicle": "R00",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 6.656342546280505,
+        "actual_time": 9.599999999999998,
+        "delay": 2.943657453719493
+      },
+      {
+        "vehicle": "R01",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 1.33097637274305,
+        "actual_time": 1.9999999999999998,
+        "delay": 0.6690236272569499
+      },
+      {
+        "vehicle": "R02",
+        "reached_goal": true,
+        "final_distance_to_goal": 0.0,
+        "ideal_time": 20.271951590988323,
+        "actual_time": 25.79999999999994,
+        "delay": 5.5280484090116175
+      }
+    ]
+  },
+  "original_verify_manifest_output": "safety_report.txt",
+  "plot": {
+    "html": "R01_mixed_0000.html",
+    "png": "R01_mixed_0000.png"
+  }
+}
